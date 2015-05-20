@@ -62,7 +62,7 @@ csoundoutput bounds(5,230, 455, 250), text("Output")
         instr 2
 	a1	        soundin "C:/SampleArchive/GrainSource/GrSrc_StruglKor2mono_Cut_48.wav"
 	;a1	        soundin "C:/SampleArchive/GrainSource/t_plukkgit_48.wav"
-	;a1,a0	        soundin "C:/SampleArchive/DRUM/MyLoops/CatofCats2.wav"
+	a1,a0	        soundin "C:/SampleArchive/DRUM/MyLoops/CatofCats2.wav"
 	;a1,a0	        soundin "C:/SampleArchive/DRUM/MyLoops/DreamlandBreak2.wav"
         anoise          rnd31 1, 1
         ;klin            line 660, p3, 220
@@ -112,8 +112,9 @@ csoundoutput bounds(5,230, 455, 250), text("Output")
         atest           oscili krms, kcps*2, giSine
 
 	fout "analysis_test.wav", 14, a1, \
-                                acps_n, \
-                                apitch_n
+                                akurtosis_n, \
+                                akurt_env, \
+                                akurt_trans
         outs atest, atest                                
         
         endin

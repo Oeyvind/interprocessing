@@ -1,6 +1,6 @@
 <Cabbage>
-form size(365, 760), caption("Analyzer"), pluginID("anlz")
-image bounds(0, 0, 365, 760), file("background.jpg"), shape("round")
+form size(365, 500), caption("Analyzer"), pluginID("anlz")
+image bounds(0, 0, 365, 500), file("background.jpg"), shape("round")
 
 label text("channel"), bounds(15, 16, 75, 12)
 combobox channel("chan"), bounds(80, 12, 60, 25), items("1", "2", "3", "4"), value(1)
@@ -48,7 +48,7 @@ label text("pitch"), bounds(12, 429, 70, 12)
 checkbox channel("puptransientDisplay"),bounds(42, 445, 15, 15), value(0)
 checkbox channel("pdwntransientDisplay"),bounds(42, 460, 15, 15), value(0)
 
-csoundoutput bounds(5, 500, 290, 250), text("Output")
+;csoundoutput bounds(5, 500, 290, 250), text("Output")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
@@ -97,7 +97,7 @@ csoundoutput bounds(5, 500, 290, 250), text("Output")
         endif
 send:
 #include "analyze_send.inc"
-        atest           oscili krms, kcps*2, giSine
+        atest           oscili interp(krms), kcps*2, giSine
                         outs atest, atest
         endin
 

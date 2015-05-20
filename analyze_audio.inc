@@ -224,7 +224,7 @@ rireturn
 	                reinit sklightTransient
         endif
 sklightTransient:
-        kkurt_trans     linseg 1,0.15,1,0,0,0
+        kkurt_trans     linseg 1,0.05,1,0,0,0
                         chnset kkurt_trans, "ktransientDisplay"
 rireturn
 
