@@ -8,6 +8,8 @@ combobox channel("chan"), bounds(80, 12, 60, 25), items("1", "2", "3", "4"), val
 rslider bounds(15, 40, 65, 65), text("Noisefloor"), channel("inputNoisefloor"), range(-96, 0, -40) 
 label text("pitch track method"), bounds(90, 50, 120, 12)
 combobox channel("pitchmethod"), bounds(90, 68, 120, 15), items("ptrack", "plltrack", "pitchamdf", "epoch"), value(1)
+button channel("pitchMonitor"),bounds(90, 88, 120, 15), text("pitch monitor"), colour:0("black"), colour:1("green"), latching(1)
+
 rslider bounds(220, 40, 65, 65), text("pFiltSize"), channel("pitchFilterSize"), range(3, 255, 25, 0.3, 1) 
 texteditor bounds(290, 43, 45, 15), channel("pitch_high"), colour(0,0,0,255), fontcolour("white"), text(1200)
 texteditor bounds(290, 64, 45, 15), channel("pitch_low"), colour(0,0,0,255), fontcolour("white"), text(100)
@@ -97,7 +99,8 @@ checkbox channel("pdwntransientDisplay"),bounds(42, 460, 15, 15), value(0)
         endif
 send:
 #include "analyze_send.inc"
-        atest           oscili interp(krms), kcps*2, giSine
+        kmonitor        chnget "pitchMonitor"
+        atest           oscili interp(krms)*kmonitor, kcps, giSine
                         outs atest, atest
         endin
 

@@ -26,7 +26,7 @@
         chnset 0.8, "kurt_transientThresh"         ; transient trig threshold 
         chnset 0, "kurt_transientDecThresh"       ; retrig threshold, how much must the level decay from its local max before allowing new transient trig
         chnset 0.5, "kurt_transientDecTime"        ; decay time for the envelope follower, filtering the signal before transient detaction
-        chnset 0.2, "kurt_transientDoubleLimit"       ; minimum duration between transients, (double trig limit)
+        chnset 0.1, "kurt_transientDoubleLimit"       ; minimum duration between transients, (double trig limit)
   
         chnset 1.5, "pitch_transientThresh"         ; transient trig threshold 
         chnset 0.0, "pitch_transientDecThresh"       ; retrig threshold, how much must the level decay from its local max before allowing new transient trig

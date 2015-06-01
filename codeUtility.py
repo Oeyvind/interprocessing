@@ -10,6 +10,27 @@ if sys.argv[1] == 'template':
                 # where skew is a dynamic adjustment of exp/lin/log translation if the GUI widget
                 # and increment is the smallest change allowed by the GUI widget
 
+if sys.argv[1] == 'stereopan':
+    effectname = 'stereopan'
+    parameters = [('Pan', (0.0, 1.0, 0.5, 1, 0.001))] 
+
+if sys.argv[1] == 'tremolam':
+    effectname = 'tremolam'
+    parameters = [('Depth', (0.0, 1.0, 0.5, 0.25, 0.001)),
+                  ('RateLow', (0.0, 10.0, 0.5, 0.25, 0.001)),
+                  ('RateHigh', (0.0, 500.0, 0.5, 0.25, 0.001))] 
+
+if sys.argv[1] == 'vst_mediator':
+    effectname = 'vst_mediator'
+    parameters = [('parm1', (0.0, 1.0, 0.5, 1, 0.001)), 
+                  ('parm2', (0.0, 1.0, 0.5, 1, 0.001)), 
+                  ('parm3', (0.0, 1.0, 0.5, 1, 0.001)), 
+                  ('parm4', (0.0, 1.0, 0.5, 1, 0.001)), 
+                  ('parm5', (0.0, 1.0, 0.5, 1, 0.001)), 
+                  ('parm6', (0.0, 1.0, 0.5, 1, 0.001)), 
+                  ('parm7', (0.0, 1.0, 0.5, 1, 0.001)), 
+                  ('parm8', (0.0, 1.0, 0.5, 1, 0.001))
+                  ]
 
 if sys.argv[1] == 'stereodelay':
     effectname = 'stereodelay'
@@ -29,7 +50,8 @@ if sys.argv[1] == 'lpf18dist':
 
 if sys.argv[1] == 'screverb':
     effectname = 'screverb'
-    parameters = [('Feed', (0.0, 1.0, 0.85, 1.2, 0.01)), 
+    parameters = [('InLevel', (1, 12, 2, 1, 0.1)), 
+                  ('Feed', (0.0, 1.0, 0.85, 1.2, 0.01)), 
                   ('FiltFq', (100, 14000, 7000, 0.6, 1)), 
                   ('PitchMod', (0.0, 4.0, 0.9, 1, 0.01)), 
                   ('PreDly', (0.0, 500, 120, 1, 1)), 
