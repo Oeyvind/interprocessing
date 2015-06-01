@@ -50,7 +50,7 @@ if sys.argv[1] == 'lpf18dist':
 
 if sys.argv[1] == 'screverb':
     effectname = 'screverb'
-    parameters = [('InLevel', (1, 12, 2, 1, 0.1)), 
+    parameters = [('InLevel', (0, 1.0, 0.2, 0.3, 0.01)), 
                   ('Feed', (0.0, 1.0, 0.85, 1.2, 0.01)), 
                   ('FiltFq', (100, 14000, 7000, 0.6, 1)), 
                   ('PitchMod', (0.0, 4.0, 0.9, 1, 0.01)), 
