@@ -4,7 +4,7 @@ image bounds(0, 0, 575, 115), file("background.jpg"), shape("round")
 label text("port"), bounds(10, 10, 80, 12), identchannel("port_id")
 
 groupbox bounds(5, 30, 564, 81), plant("plant_Pan"), linethickness("0"){ 
-combobox channel("source1_Pan"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans"), value(1), channeltype("string")
+combobox channel("source1_Pan"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_Pan"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 texteditor bounds(158, 14, 35, 15), channel("rise1_Pan"), colour(0,0,0,255), fontcolour("white"), text(0.01)
 texteditor bounds(196, 14, 35, 15), channel("fall1_Pan"), colour(0,0,0,255), fontcolour("white"), text(0.5)
@@ -12,7 +12,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_Pan"), range(-1.0, 1.0, 0, 1, 0
 button bounds(320, 12, 29, 19), channel("scale1_x_Pan"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_Pan"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_Pan"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans"), value(1), channeltype("string")
+combobox channel("source2_Pan"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_Pan"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 texteditor bounds(158, 36, 35, 15), channel("rise2_Pan"), colour(0,0,0,255), fontcolour("white"), text(0.01)
 texteditor bounds(196, 36, 35, 15), channel("fall2_Pan"), colour(0,0,0,255), fontcolour("white"), text(0.5)

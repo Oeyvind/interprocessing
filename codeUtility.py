@@ -39,6 +39,15 @@ if sys.argv[1] == 'stereodelay':
                   ('feedback', (0.0, 0.9999, 0.3, 1.9, 0.0001))
                   ]
               
+if sys.argv[1] == 'pluck':
+    effectname = 'pluck'
+    parameters = [('inlevel', (0, 1.0, 1, 0.3, 0.01)), 
+                  ('freq', (1, 2000, 400, 0.3, 0.01)), 
+                  ('filt_fq', (1000, 16000, 7000, 0.35, 1)),
+                  ('feedback', (0.8, 0.9999, 0.95, 1.9, 0.0001)),
+                  ('mix', (0, 1.0, 1, 0.3, 0.01))
+                  ]
+
 if sys.argv[1] == 'lpf18dist':
     effectname = 'lpf18dist'
     parameters = [('Drive', (1, 12, 2, 1, 0.1)), 
@@ -85,7 +94,7 @@ chn_init_file.write(instr_template.format(parameter_ranges))
 #
 start_x_pos = 30
 plant_height = 85
-analysis_parms = '"rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans"'
+analysis_parms = '"rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"'
 
 plant = '''groupbox bounds(5, {start_x}, 564, 81), plant("plant_{pname}"), linethickness("0"){{ 
 combobox channel("source1_{pname}"), bounds(10, 12, 90, 20), items({analysis_p}), value(1), channeltype("string")

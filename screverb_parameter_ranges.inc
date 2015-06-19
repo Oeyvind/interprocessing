@@ -1,8 +1,8 @@
 
         instr 1
 ; list of min and max for the mappable parameters
-   chnset 1, "InLevel_min" 
-   chnset 12, "InLevel_max" 
+   chnset 0, "InLevel_min" 
+   chnset 1.0, "InLevel_max" 
    chnset 0.0, "Feed_min" 
    chnset 1.0, "Feed_max" 
    chnset 100, "FiltFq_min" 

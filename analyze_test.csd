@@ -112,9 +112,8 @@ csoundoutput bounds(5,230, 455, 250), text("Output")
         atest           oscili krms, kcps*2, giSine
 
 	fout "analysis_test.wav", 14, a1, \
-                                akurtosis_n, \
-                                akurt_env, \
-                                akurt_trans
+                                a_env, \
+                                amp_trans
         outs atest, atest                                
         
         endin

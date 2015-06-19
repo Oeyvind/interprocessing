@@ -5,7 +5,7 @@
 	kwhen           = (kwhen+1)%2   ; send on every k-rate period
 #define PUBLISH(N) #
 	iport$N.	= ibaseport + $N.
-        OSCsend         kwhen, "127.0.0.1", iport$N., SoscName, "ffffffffffffffff", krms, krms_preEq, kcps_n, kpitch_n, kcentroid_n, kspread_n, kskewness_n, kurtosis_n, kflatness, kcrest_n, kflux_n, kamp_trans, kcentr_trans, kkurt_trans, kpitchup_trans, kpitchdwn_trans
+        OSCsend         kwhen, "127.0.0.1", iport$N., SoscName, "fffffffffffffffff", krms, krms_preEq, kcps_n, kpitch_n, kcentroid_n, kspread_n, kskewness_n, kurtosis_n, kflatness, kcrest_n, kflux_n, kamp_trans, kcentr_trans, kkurt_trans, kpitchup_trans, kpitchdwn_trans, kcps ; (the kcps value is raw, not normalized!)
 
 #
 $PUBLISH(0)

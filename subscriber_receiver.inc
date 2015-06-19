@@ -115,6 +115,7 @@
         Skurt_trans     sprintf {{kurt_trans%i}}, isource_chan
         Spitchup_trans  sprintf {{pitchup_trans%i}}, isource_chan
         Spitchdown_trans sprintf {{pitchdown_trans%i}}, isource_chan
+        Scps_raw        sprintf {{cps_raw%i}}, isource_chan
 
         SoscName        sprintf {{/%s%i}}, "analysis", isource_chan
 
@@ -135,9 +136,10 @@
         kkurt_trans     init 0
         kpitchup_trans  init 0
         kpitchdwn_trans init 0
+        kcps_raw        init 0
         
 nxt_val:
-    	kk		OSClisten gihandle, SoscName, "ffffffffffffffff", krms, krms_preEq, kcps, kpitch, kcentroid, kspread, kskewness, kurtosis, kflatness, kcrest, kflux, kamp_trans, kcentr_trans, kkurt_trans, kpitchup_trans, kpitchdwn_trans
+    	kk		OSClisten gihandle, SoscName, "fffffffffffffffff", krms, krms_preEq, kcps, kpitch, kcentroid, kspread, kskewness, kurtosis, kflatness, kcrest, kflux, kamp_trans, kcentr_trans, kkurt_trans, kpitchup_trans, kpitchdwn_trans, kcps_raw
                 	chnset krms, Srms               	
                 	chnset krms_preEq, Srms_preEq
                         chnset kcps, Scps            
@@ -154,6 +156,7 @@ nxt_val:
                         chnset kkurt_trans, Skurt_trans
                         chnset kpitchup_trans, Spitchup_trans
                         chnset kpitchdwn_trans, Spitchdown_trans
+                        chnset kcps_raw, Scps_raw   
 
 if (kk == 0) goto ex_val
     	kgoto nxt_val
@@ -171,6 +174,14 @@ ex_val:
         kval_0          chnget SsourceChan
         ;Source_val      sprintfk "param %s instr %f source %s val%f", Sparam, p1, SsourceChan, kval
         ;puts Source_val, kval
+
+        kraw            strindexk Ssource, "_raw"
+        ;Stest           sprintfk "%s : %i", Ssource, kraw
+        ;                puts Stest, kraw+10
+        krawflag        = (kraw>0?1:0)
+        Srawflag        sprintf "%s_raw_flag%i", Sparam, idest_mix_chn
+        ;puts Srawflag, 1
+                        chnset krawflag, Srawflag
 
         ; if source is a transient trigger, make an envelope
         itrigSource     strindex Ssource, "_trans"
@@ -219,6 +230,7 @@ transEnvelope:
         kcurved         = kcurved*kscale_param
         Stemp           sprintf "temp%i_%s", idest_mix_chn, Sparam
                         chnset kcurved, Stemp
+                                                
         endin
         
         instr 8
@@ -242,6 +254,21 @@ transEnvelope:
         else
         koffset1        = koffset
         endif
-        kval            limit ((kval1+kval2)*(imax-imin))+koffset1, imin, imax
+        Srawflag1        sprintf "%s_raw_flag1", Sparam
+        Srawflag2        sprintf "%s_raw_flag2", Sparam
+        kraw1           chnget Srawflag1
+        kraw2           chnget Srawflag2
+        ;printk2 kraw1
+        ;printk2 kraw2, 10
+        if (kraw1 == 1) && (kraw2 == 0) then
+        kval            limit kval1+(kval2*(imax-imin))+koffset1, imin, imax  ; do not autoscale raw values for source 1
+        elseif (kraw2 == 1) && (kraw1 == 0) then
+        kval            limit (kval1*(imax-imin))+kval2+koffset1, imin, imax  ; do not autoscale raw values for source 2
+        elseif (kraw2 == 1) && (kraw1 == 1) then
+        kval            limit kval1+kval2+koffset1, imin, imax                ; do not autoscale raw values for either source
+        else
+        kval            limit ((kval1+kval2)*(imax-imin))+koffset1, imin, imax  ; autoascale normalized values
+        endif
+        ;printks "raw1 %i, val1 %f, raw2 %i, val2 %f, outval %f \n", 1, kraw1, kval1, kraw2, kval2, kval
                         chnset kval, Sparam
 	endin
