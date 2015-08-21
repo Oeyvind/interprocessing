@@ -59,7 +59,7 @@ if sys.argv[1] == 'stereodelay':
 if sys.argv[1] == 'pluck':
     effectname = 'pluck'
     parameters = [('inlevel', (0, 1.0, 1, 0.3, 0.01)), 
-                  ('freq', (1, 2000, 400, 0.3, 0.01)), 
+                  ('freq', (1, 1450, 400, 0.3, 0.01)), 
                   ('filt_fq', (1000, 16000, 7000, 0.35, 1)),
                   ('feedback', (0.8, 0.9999, 0.95, 1.9, 0.0001)),
                   ('mix', (0, 1.0, 1, 0.3, 0.01))
@@ -83,6 +83,56 @@ if sys.argv[1] == 'screverb':
                   ('PreDly', (0.0, 500, 120, 1, 1)), 
                   ('LfRoll', (20, 500, 90, 1, 1)), 
                   ('Mix', (0.0, 1.0, 1.0, 1, 0.01))
+                  ]
+
+if sys.argv[1] == 'freeverb':
+    effectname = 'freeverb'
+    parameters = [('inlevel', (0, 1.0, 1.0, 0.3, 0.01)), 
+                  ('reverbtime', (0.0, 8.0, 1.5, 0.4, 0.01)), 
+                  ('reverbdamp', (0.0, 1.0, 0.25, 0.6, 0.01)), 
+                  ('reverbmix', (0.0, 1.0, 0.7, 1, 0.01))
+                  ]
+
+if sys.argv[1] == 'mincertime':
+    effectname = 'mincertime'
+    parameters = [('inlevel', (0, 1.0, 1, 0.3, 0.01)), 
+                  ('timpoint', (0, 0.99, 0.1, 0.4, 0.001)), 
+                  ('pitch', (0.0, 2.0, 1.0, 1, 0.01)),
+                  ('feedback', (0.0, 1.0, 0.0, 1, 0.01)),
+                  ('mix', (0, 1.0, 1, 0.3, 0.01))
+                  ]
+
+if sys.argv[1] == 'plucktremlpfverb':
+    effectname = 'plucktremlpfverb'
+    parameters = [('inlevel', (0, 1.0, 1, 0.3, 0.01)), 
+                  ('pluckfreq', (1, 1450, 400, 0.3, 0.01)), 
+                  ('pluckfilt', (1000, 16000, 7000, 0.35, 1)),
+                  ('pluckfeed', (0.8, 0.9999, 0.95, 1.9, 0.0001)),
+                  ('pluckmix', (0, 1.0, 1, 0.3, 0.01)),
+                  ('tremDepth', (0.0, 1.0, 0.5, 0.25, 0.001)),
+                  ('tRateLow', (0.0, 10.0, 0.5, 0.25, 0.001)),
+                  ('tRateHigh', (0.0, 500.0, 0.5, 0.25, 0.001)),  
+                  ('lpfDrive', (1, 12, 2, 1, 0.1)), 
+                  ('lpfFreq', (20, 10000, 3000, 0.35, 1)),
+                  ('lpfResonance', (0.001, 0.95, 0.3, 1, 0.001)),
+                  ('lpfDist', (0.001, 10, 0.2, 0.5, 0.001)),
+                  ('lpfMix', (0.0, 1.0, 1.0, 1, 0.01)),
+                  ('reverbtime', (0.0, 8.0, 1.5, 0.4, 0.01)), 
+                  ('reverbdamp', (0.0, 1.0, 0.25, 0.6, 0.01)), 
+                  ('reverbmix', (0.0, 1.0, 0.7, 1, 0.01))
+                  ]
+
+if sys.argv[1] == 'mincerpanverb':
+    effectname = 'mincerpanverb'
+    parameters = [('inlevel', (0, 1.0, 1, 0.3, 0.01)), 
+                  ('mincertime', (0, 0.99, 0.1, 0.4, 0.001)), 
+                  ('mincerpitch', (0.0, 2.0, 1.0, 1, 0.01)),
+                  ('mincerfeed', (0.0, 1.0, 0.0, 1, 0.01)),
+                  ('mincermix', (0, 1.0, 1, 0.3, 0.01)),
+                  ('Pan', (0.0, 1.0, 0.5, 1, 0.001)),
+                  ('reverbtime', (0.0, 8.0, 1.5, 0.4, 0.01)), 
+                  ('reverbdamp', (0.0, 1.0, 0.25, 0.6, 0.01)), 
+                  ('reverbmix', (0.0, 1.0, 0.7, 1, 0.01))
                   ]
 
 #
@@ -110,10 +160,12 @@ chn_init_file.write(instr_template.format(parameter_ranges))
 
 #
 start_x_pos = 30
+start_y_pos = 5
 plant_height = 85
 analysis_parms = '"rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"'
 
-plant = '''groupbox bounds(5, {start_x}, 564, 81), plant("plant_{pname}"), linethickness("0"){{ 
+
+plant = '''groupbox bounds({start_y}, {start_x}, 564, 81), plant("plant_{pname}"), linethickness("0"){{ 
 combobox channel("source1_{pname}"), bounds(10, 12, 90, 20), items({analysis_p}), value(1), channeltype("string")
 combobox channel("chan1_{pname}"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 texteditor bounds(158, 14, 35, 15), channel("rise1_{pname}"), colour(0,0,0,255), fontcolour("white"), text(0.01)
@@ -144,7 +196,15 @@ rslider bounds(494, 8, 66, 66), text("{pname}"), channel("{pname}"), range({p_mi
 
 '''
 guifile = open(effectname+'_gui_scratchpad.inc', 'w')
+x_pos = start_x_pos
+x_pos1 = start_x_pos
+y_pos = start_y_pos
 for i in range(len(parameters)):
     parm = parameters[i]
-    guifile.write(plant.format(start_x=start_x_pos+(i*plant_height), pname=parm[0], analysis_p=analysis_parms,p_min=parm[1][0], p_max=parm[1][1], p_default=parm[1][2], p_skew=parm[1][3], p_incr=parm[1][4]))
-guifile.write(';next x position available below plants is {}'.format(start_x_pos+((i+1)*plant_height)))
+    if (effectname == 'plucktremlpfverb') and (parm[0] == 'lpfDrive'): 
+        x_pos1 = x_pos
+        x_pos = start_x_pos
+        y_pos = 575
+    guifile.write(plant.format(start_x=x_pos, start_y=y_pos, pname=parm[0], analysis_p=analysis_parms,p_min=parm[1][0], p_max=parm[1][1], p_default=parm[1][2], p_skew=parm[1][3], p_incr=parm[1][4]))
+    x_pos+=plant_height
+guifile.write(';next x position available below plants is {}'.format(max([x_pos,x_pos1])))

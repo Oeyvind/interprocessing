@@ -77,7 +77,7 @@ checkbox channel("pdwntransientDisplay"),bounds(42, 460, 15, 15), value(0)
 <CsInstruments>
 
         sr = 48000
-        ksmps = 128
+        ksmps = 256
 	nchnls = 2
 	0dbfs = 1
 

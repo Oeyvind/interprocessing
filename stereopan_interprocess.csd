@@ -85,8 +85,8 @@ rslider bounds(494, 8, 66, 66), text("Pan"), channel("Pan"), range(0.0, 1.0, 0.5
 	aPan            interp kPan
 	; sinoid equal power panning
 	aAngle		=  1.57079633 * aPan
-        aLeft		= a1 * sin(aAngle)
-	aRight		= a1 * cos(aAngle)
+        aLeft		= a1 * cos(aAngle)
+	aRight		= a1 * sin(aAngle)
 			outs aLeft, aRight
 
 	endin

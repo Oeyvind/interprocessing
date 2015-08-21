@@ -72,10 +72,10 @@ label bounds(156, 58, 76, 12), text("rise/fall"), colour(20,20,20,255)
 label bounds(236, 58, 110, 12), text("scale"), colour(20,20,20,255)
 label bounds(352, 58, 81, 12), text("curve"), colour(20,20,20,255)
 
-rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_freq"), range(1, 2000, 400, 0.3, 0.01) 
+rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_freq"), range(1, 1450, 400, 0.3, 0.01) 
 combobox bounds(433, 1, 55, 12), channel("offsetx_freq"), items("-1", "Nornm", "+1"), , value(2), channeltype("string")
 
-rslider bounds(494, 8, 66, 66), text("freq"), channel("freq"), range(1, 2000, 400, 0.3, 0.01)
+rslider bounds(494, 8, 66, 66), text("freq"), channel("freq"), range(1, 1450, 400, 0.3, 0.01)
 }
 
 groupbox bounds(5, 200, 564, 81), plant("plant_filt_fq"), linethickness("0"){ 
@@ -175,7 +175,7 @@ rslider bounds(494, 8, 66, 66), text("mix"), channel("mix"), range(0, 1.0, 1, 0.
 <CsInstruments>
 
         sr = 48000
-	ksmps = 64
+	ksmps = 32
 	nchnls = 2
 	0dbfs = 1
 
@@ -206,15 +206,8 @@ rslider bounds(494, 8, 66, 66), text("mix"), channel("mix"), range(0, 1.0, 1, 0.
 	kfeed		chnget "feedback"			; delay feedback
 	kfilt_fq	chnget "filt_fq"			; feedback filter freq
 	kmix		chnget "mix"				; wet/dry
-
-        kfreq           tonek kfreq, 10
-        adelt           = interp(divz(1,kfreq,0.1))
-
-	adummy		delayr imaxdel				; establish delay line
-	adly		deltapi adelt 				; tap delay Left
-	adelw		= a1 + (adly*interp(kfeed))		; mix input and feedback
-	adelw		butterlp adelw, kfilt_fq       	        ; filter delay signal
-			delayw	adelw				; write source to delay line
+        
+  	adly 		wguide1 a1, kfreq, kfilt_fq, kfeed
 
 	aout		dcblock2 (adly*interp(kmix))+(a1*(1-interp(kmix)))
 			outs aout, aout
