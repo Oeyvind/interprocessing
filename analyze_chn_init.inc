@@ -21,8 +21,8 @@
 
         chnset 4, "pitchmethod"
 	chnset 31, "pitchFilterSize"
-        chnset "100", "pitch_low"       ; string channels due to gui wodget type
-        chnset "1200", "pitch_high"
+        chnset 100, "pitch_low"       ; string channels due to gui wodget type
+        chnset 1200, "pitch_high"
 
 
         ; transient detect parameters

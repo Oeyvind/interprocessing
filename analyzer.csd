@@ -16,7 +16,7 @@
 ;    If not, see <http://www.gnu.org/licenses/>.
 
 <Cabbage>
-form size(365, 500), caption("Analyzer"), pluginID("anlz")
+form size(365, 750), caption("Analyzer"), pluginID("anlz")
 image bounds(0, 0, 365, 500), file("background.jpg"), shape("round")
 
 label text("channel"), bounds(15, 16, 75, 12)
@@ -28,8 +28,10 @@ combobox channel("pitchmethod"), bounds(90, 68, 120, 15), items("ptrack", "plltr
 button channel("pitchMonitor"),bounds(90, 88, 120, 15), text("pitch monitor"), colour:0("black"), colour:1("green"), latching(1)
 
 rslider bounds(220, 40, 65, 65), text("pFiltSize"), channel("pitchFilterSize"), range(3, 255, 25, 0.3, 1) 
-texteditor bounds(290, 43, 45, 15), channel("pitch_high"), colour(0,0,0,255), fontcolour("white"), text(1200)
-texteditor bounds(290, 64, 45, 15), channel("pitch_low"), colour(0,0,0,255), fontcolour("white"), text(100)
+;texteditor bounds(290, 43, 45, 15), channel("pitch_high"), text(1200)
+;texteditor bounds(290, 64, 45, 15), channel("pitch_low"), text(100)
+numberbox bounds(290, 43, 60, 15), channel("pitch_high"), range(50, 2000, 1200)
+numberbox bounds(290, 64, 60, 15), channel("pitch_low"), range(50, 2000, 100)
 label bounds(290, 89, 50, 12), text("p range"),  colour(50, 50, 50, 255)
 
 label bounds(15, 120, 202, 12), text("pre emphasis for amp trans)"),  colour(50, 50, 50, 255)
@@ -67,7 +69,7 @@ label text("pitch"), bounds(12, 429, 70, 12)
 checkbox channel("puptransientDisplay"),bounds(42, 445, 15, 15), value(0)
 checkbox channel("pdwntransientDisplay"),bounds(42, 460, 15, 15), value(0)
 
-;csoundoutput bounds(5, 500, 290, 250), text("Output")
+csoundoutput bounds(5, 500, 290, 250), text("Output")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>

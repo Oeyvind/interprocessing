@@ -29,7 +29,8 @@ if sys.argv[1] == 'template':
 
 if sys.argv[1] == 'stereopan':
     effectname = 'stereopan'
-    parameters = [('Pan', (0.0, 1.0, 0.5, 1, 0.001))] 
+    parameters = [('Pan', (0.0, 1.0, 0.5, 1, 0.001)),
+                  ('Mix', (0.0, 1.0, 0.5, 1, 0.001))] 
 
 if sys.argv[1] == 'tremolam':
     effectname = 'tremolam'
@@ -130,6 +131,7 @@ if sys.argv[1] == 'mincerpanverb':
                   ('mincerfeed', (0.0, 1.0, 0.0, 1, 0.01)),
                   ('mincermix', (0, 1.0, 1, 0.3, 0.01)),
                   ('Pan', (0.0, 1.0, 0.5, 1, 0.001)),
+                  ('panMix', (0.0, 1.0, 0.5, 1, 0.001)),
                   ('reverbtime', (0.0, 8.0, 1.5, 0.4, 0.01)), 
                   ('reverbdamp', (0.0, 1.0, 0.25, 0.6, 0.01)), 
                   ('reverbmix', (0.0, 1.0, 0.7, 1, 0.01))
@@ -168,16 +170,16 @@ analysis_parms = '"rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "ske
 plant = '''groupbox bounds({start_y}, {start_x}, 564, 81), plant("plant_{pname}"), linethickness("0"){{ 
 combobox channel("source1_{pname}"), bounds(10, 12, 90, 20), items({analysis_p}), value(1), channeltype("string")
 combobox channel("chan1_{pname}"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
-texteditor bounds(158, 14, 35, 15), channel("rise1_{pname}"), colour(0,0,0,255), fontcolour("white"), text(0.01)
-texteditor bounds(196, 14, 35, 15), channel("fall1_{pname}"), colour(0,0,0,255), fontcolour("white"), text(0.5)
+numberbox bounds(158, 14, 35, 15), channel("rise1_{pname}"), range(0.01, 10.0, 0.01)
+numberbox bounds(196, 14, 35, 15), channel("fall1_{pname}"), range(0.01, 10.0, 0.5)
 hslider bounds(233, 12, 86, 20), channel("scale1_{pname}"), range(-1.0, 1.0, 0, 1, 0.01)
 button bounds(320, 12, 29, 19), channel("scale1_x_{pname}"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_{pname}"), range(-5.0, 5.0, 0)
 
 combobox channel("source2_{pname}"), bounds(10, 34, 90, 20), items({analysis_p}), value(1), channeltype("string")
 combobox channel("chan2_{pname}"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
-texteditor bounds(158, 36, 35, 15), channel("rise2_{pname}"), colour(0,0,0,255), fontcolour("white"), text(0.01)
-texteditor bounds(196, 36, 35, 15), channel("fall2_{pname}"), colour(0,0,0,255), fontcolour("white"), text(0.5)
+numberbox bounds(158, 36, 35, 15), channel("rise2_{pname}"), range(0.01, 10.0, 0.01)
+numberbox bounds(196, 36, 35, 15), channel("fall2_{pname}"), range(0.01, 10.0, 0.5)
 hslider bounds(233, 34, 86, 20), channel("scale2_{pname}"), range(-1.0, 1.0, 0, 1, 0.01)
 button bounds(320, 34, 29, 19), channel("scale2_x_{pname}"), text("x 1","x 10"), 
 hslider bounds(349, 34, 86, 20), channel("curve2_{pname}"), range(-5.0, 5.0, 0)

@@ -13,6 +13,8 @@
    chnset 1.0, "mincermix_max" 
    chnset 0.0, "Pan_min" 
    chnset 1.0, "Pan_max" 
+   chnset 0.0, "panMix_min" 
+   chnset 1.0, "panMix_max" 
    chnset 0.0, "reverbtime_min" 
    chnset 8.0, "reverbtime_max" 
    chnset 0.0, "reverbdamp_min" 

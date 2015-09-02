@@ -1,1 +1,2 @@
 i4.01	3.1	$SCORELEN "Pan"
+i4.02	3.1	$SCORELEN "Mix"

@@ -208,10 +208,8 @@ ex_val:
         endif
         Srisechn        sprintf "rise%i_%s", idest_mix_chn, Sparam
         Sfallchn        sprintf "fall%i_%s", idest_mix_chn, Sparam
-        Srise           chnget Srisechn
-        Sfall           chnget Sfallchn
-        krise           strtodk Srise
-        kfall           strtodk Sfall
+        krise           chnget Srisechn
+        kfall           chnget Sfallchn
 
 transEnvelope:
         kenv            linseg 0, i(krise), 1, i(kfall), 0, 1, 0

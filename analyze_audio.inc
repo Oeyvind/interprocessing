@@ -253,11 +253,11 @@ rireturn
 ; pitchtracking based on epoch filtering is effective for vocal signals and speech but may also work ok in other contexts
 
         kpitchmethod    chnget "pitchmethod"
-        Spitch_low      chnget "pitch_low"
-        Spitch_high     chnget "pitch_high"
-        kpitch_low      strtodk Spitch_low
-        kpitch_high     strtodk Spitch_high
-        
+        kpitch_low      chnget "pitch_low"
+        kpitch_high     chnget "pitch_high"
+        kpitch_low      init 100
+        kpitch_high     init 1000
+         
         ; reinit pitchamdf when pitch range changes
         kp_range_change changed kpitch_low, kpitch_high
         if kp_range_change > 0 then
