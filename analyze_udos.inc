@@ -20,6 +20,7 @@
 
 	opcode TransientDetect, kk,kikkkk
 	kin, iresponse, ktthresh, klowThresh, kdecThresh, kdoubleLimit xin 
+        ;setksmps 32
 /*
 	iresponse	= 10 		; response time in milliseconds
 	ktthresh	= 6		; transient trig threshold 
@@ -92,3 +93,25 @@ double:
 	kepochZCcps     mediank kepochZCcps, 40, 40
 	                xout kepochZCcps
 	endop
+
+;***************************************************
+; auto normalize udo
+        opcode AutoNormalize, k, kkkk
+        kval, kreset, kcalibrate, knormalize xin 
+        kval_max        init 0
+        kval_min        init 2^64
+        if kreset > 0 then
+        kval_max        = 0
+        kval_min        = 2^64
+        endif
+        if kcalibrate > 0 then
+        kval_max        max kval_max, kval
+        kval_min        min kval_min, kval
+        endif
+        if knormalize > 0 then
+        kval_n          = (kval-kval_min)*divz(1,(kval_max-kval_min), 1)
+        else
+        kval_n          = kval
+        endif
+        xout kval_n
+        endop

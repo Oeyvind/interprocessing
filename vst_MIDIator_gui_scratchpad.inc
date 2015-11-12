@@ -1,28 +1,4 @@
-;    Copyright 2015 Oeyvind Brandtsegg 
-;
-;    This file is part of the Signal Interaction Toolkit
-;
-;    The Signal Interaction Toolkit is free software: you can redistribute it and/or modify
-;    it under the terms of the GNU General Public License version 3 
-;    as published by the Free Software Foundation.
-;
-;    The Signal Interaction Toolkit is distributed in the hope that it will be useful,
-;    but WITHOUT ANY WARRANTY; without even the implied warranty of
-;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;    GNU General Public License for more details.
-;
-;    You should have received a copy of the GNU General Public License
-;    along with The Signal Interaction Toolkit.  
-;    If not, see <http://www.gnu.org/licenses/>.
-
-<Cabbage>
-form size(575, 710), caption("VST_mediator"), pluginID("vmed")
-;image bounds(0, 0, 575, 710), file("background.jpg"), shape("round")
-label text("port"), bounds(10, 10, 80, 12), identchannel("port_id")
-label text("output_port"), bounds(120, 10, 80, 12)
-combobox channel("output_port"), bounds(200, 6, 90, 20), items("7021", "7022", "7023", "7024", "7025"), value(1), channeltype("string")
-
-groupbox bounds(5, 30, 564, 81), plant("plant_parm1"), linethickness("0"){ 
+groupbox bounds(5, 30, 710, 81), plant("plant_parm1"), linethickness("0"){ 
 combobox channel("source1_parm1"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_parm1"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_parm1"), range(0.01, 10.0, 0.01)
@@ -49,9 +25,17 @@ rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_parm1"), range(
 combobox bounds(433, 1, 55, 12), channel("offsetx_parm1"), items("-1", "Nornm", "+1"), , value(2), channeltype("string")
 
 rslider bounds(494, 8, 66, 66), text("parm1"), channel("parm1"), range(0.0, 1.0, 0.5, 1, 0.001)
+
+label bounds(570, 8, 55, 12), text("midi"), colour(20,20,20,255)
+checkbox bounds(632, 8, 12, 12), text("enable"), channel("enable_parm1"), value(1)
+numberbox bounds(570, 25, 55, 15), channel("midich_parm1"), range(1, 16, 1)
+numberbox bounds(570, 42, 55, 15), channel("ctrlnum_parm1"), range(1, 127, 1)
+label bounds(632, 25, 70, 12), text("channel"), colour(20,20,20,255)
+label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
+
 }
 
-groupbox bounds(5, 115, 564, 81), plant("plant_parm2"), linethickness("0"){ 
+groupbox bounds(5, 115, 710, 81), plant("plant_parm2"), linethickness("0"){ 
 combobox channel("source1_parm2"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_parm2"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_parm2"), range(0.01, 10.0, 0.01)
@@ -78,9 +62,17 @@ rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_parm2"), range(
 combobox bounds(433, 1, 55, 12), channel("offsetx_parm2"), items("-1", "Nornm", "+1"), , value(2), channeltype("string")
 
 rslider bounds(494, 8, 66, 66), text("parm2"), channel("parm2"), range(0.0, 1.0, 0.5, 1, 0.001)
+
+label bounds(570, 8, 55, 12), text("midi"), colour(20,20,20,255)
+checkbox bounds(632, 8, 12, 12), text("enable"), channel("enable_parm2"), value(1)
+numberbox bounds(570, 25, 55, 15), channel("midich_parm2"), range(1, 16, 1)
+numberbox bounds(570, 42, 55, 15), channel("ctrlnum_parm2"), range(1, 127, 1)
+label bounds(632, 25, 70, 12), text("channel"), colour(20,20,20,255)
+label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
+
 }
 
-groupbox bounds(5, 200, 564, 81), plant("plant_parm3"), linethickness("0"){ 
+groupbox bounds(5, 200, 710, 81), plant("plant_parm3"), linethickness("0"){ 
 combobox channel("source1_parm3"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_parm3"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_parm3"), range(0.01, 10.0, 0.01)
@@ -107,9 +99,17 @@ rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_parm3"), range(
 combobox bounds(433, 1, 55, 12), channel("offsetx_parm3"), items("-1", "Nornm", "+1"), , value(2), channeltype("string")
 
 rslider bounds(494, 8, 66, 66), text("parm3"), channel("parm3"), range(0.0, 1.0, 0.5, 1, 0.001)
+
+label bounds(570, 8, 55, 12), text("midi"), colour(20,20,20,255)
+checkbox bounds(632, 8, 12, 12), text("enable"), channel("enable_parm3"), value(1)
+numberbox bounds(570, 25, 55, 15), channel("midich_parm3"), range(1, 16, 1)
+numberbox bounds(570, 42, 55, 15), channel("ctrlnum_parm3"), range(1, 127, 1)
+label bounds(632, 25, 70, 12), text("channel"), colour(20,20,20,255)
+label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
+
 }
 
-groupbox bounds(5, 285, 564, 81), plant("plant_parm4"), linethickness("0"){ 
+groupbox bounds(5, 285, 710, 81), plant("plant_parm4"), linethickness("0"){ 
 combobox channel("source1_parm4"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_parm4"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_parm4"), range(0.01, 10.0, 0.01)
@@ -136,9 +136,17 @@ rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_parm4"), range(
 combobox bounds(433, 1, 55, 12), channel("offsetx_parm4"), items("-1", "Nornm", "+1"), , value(2), channeltype("string")
 
 rslider bounds(494, 8, 66, 66), text("parm4"), channel("parm4"), range(0.0, 1.0, 0.5, 1, 0.001)
+
+label bounds(570, 8, 55, 12), text("midi"), colour(20,20,20,255)
+checkbox bounds(632, 8, 12, 12), text("enable"), channel("enable_parm4"), value(1)
+numberbox bounds(570, 25, 55, 15), channel("midich_parm4"), range(1, 16, 1)
+numberbox bounds(570, 42, 55, 15), channel("ctrlnum_parm4"), range(1, 127, 1)
+label bounds(632, 25, 70, 12), text("channel"), colour(20,20,20,255)
+label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
+
 }
 
-groupbox bounds(5, 370, 564, 81), plant("plant_parm5"), linethickness("0"){ 
+groupbox bounds(5, 370, 710, 81), plant("plant_parm5"), linethickness("0"){ 
 combobox channel("source1_parm5"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_parm5"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_parm5"), range(0.01, 10.0, 0.01)
@@ -165,9 +173,17 @@ rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_parm5"), range(
 combobox bounds(433, 1, 55, 12), channel("offsetx_parm5"), items("-1", "Nornm", "+1"), , value(2), channeltype("string")
 
 rslider bounds(494, 8, 66, 66), text("parm5"), channel("parm5"), range(0.0, 1.0, 0.5, 1, 0.001)
+
+label bounds(570, 8, 55, 12), text("midi"), colour(20,20,20,255)
+checkbox bounds(632, 8, 12, 12), text("enable"), channel("enable_parm5"), value(1)
+numberbox bounds(570, 25, 55, 15), channel("midich_parm5"), range(1, 16, 1)
+numberbox bounds(570, 42, 55, 15), channel("ctrlnum_parm5"), range(1, 127, 1)
+label bounds(632, 25, 70, 12), text("channel"), colour(20,20,20,255)
+label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
+
 }
 
-groupbox bounds(5, 455, 564, 81), plant("plant_parm6"), linethickness("0"){ 
+groupbox bounds(5, 455, 710, 81), plant("plant_parm6"), linethickness("0"){ 
 combobox channel("source1_parm6"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_parm6"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_parm6"), range(0.01, 10.0, 0.01)
@@ -194,9 +210,17 @@ rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_parm6"), range(
 combobox bounds(433, 1, 55, 12), channel("offsetx_parm6"), items("-1", "Nornm", "+1"), , value(2), channeltype("string")
 
 rslider bounds(494, 8, 66, 66), text("parm6"), channel("parm6"), range(0.0, 1.0, 0.5, 1, 0.001)
+
+label bounds(570, 8, 55, 12), text("midi"), colour(20,20,20,255)
+checkbox bounds(632, 8, 12, 12), text("enable"), channel("enable_parm6"), value(1)
+numberbox bounds(570, 25, 55, 15), channel("midich_parm6"), range(1, 16, 1)
+numberbox bounds(570, 42, 55, 15), channel("ctrlnum_parm6"), range(1, 127, 1)
+label bounds(632, 25, 70, 12), text("channel"), colour(20,20,20,255)
+label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
+
 }
 
-groupbox bounds(5, 540, 564, 81), plant("plant_parm7"), linethickness("0"){ 
+groupbox bounds(5, 540, 710, 81), plant("plant_parm7"), linethickness("0"){ 
 combobox channel("source1_parm7"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_parm7"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_parm7"), range(0.01, 10.0, 0.01)
@@ -223,9 +247,17 @@ rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_parm7"), range(
 combobox bounds(433, 1, 55, 12), channel("offsetx_parm7"), items("-1", "Nornm", "+1"), , value(2), channeltype("string")
 
 rslider bounds(494, 8, 66, 66), text("parm7"), channel("parm7"), range(0.0, 1.0, 0.5, 1, 0.001)
+
+label bounds(570, 8, 55, 12), text("midi"), colour(20,20,20,255)
+checkbox bounds(632, 8, 12, 12), text("enable"), channel("enable_parm7"), value(1)
+numberbox bounds(570, 25, 55, 15), channel("midich_parm7"), range(1, 16, 1)
+numberbox bounds(570, 42, 55, 15), channel("ctrlnum_parm7"), range(1, 127, 1)
+label bounds(632, 25, 70, 12), text("channel"), colour(20,20,20,255)
+label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
+
 }
 
-groupbox bounds(5, 625, 564, 81), plant("plant_parm8"), linethickness("0"){ 
+groupbox bounds(5, 625, 710, 81), plant("plant_parm8"), linethickness("0"){ 
 combobox channel("source1_parm8"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_parm8"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_parm8"), range(0.01, 10.0, 0.01)
@@ -252,102 +284,14 @@ rslider bounds(433, 12, 62, 62), text("offset"), channel("offset_parm8"), range(
 combobox bounds(433, 1, 55, 12), channel("offsetx_parm8"), items("-1", "Nornm", "+1"), , value(2), channeltype("string")
 
 rslider bounds(494, 8, 66, 66), text("parm8"), channel("parm8"), range(0.0, 1.0, 0.5, 1, 0.001)
+
+label bounds(570, 8, 55, 12), text("midi"), colour(20,20,20,255)
+checkbox bounds(632, 8, 12, 12), text("enable"), channel("enable_parm8"), value(1)
+numberbox bounds(570, 25, 55, 15), channel("midich_parm8"), range(1, 16, 1)
+numberbox bounds(570, 42, 55, 15), channel("ctrlnum_parm8"), range(1, 127, 1)
+label bounds(632, 25, 70, 12), text("channel"), colour(20,20,20,255)
+label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
+
 }
 
 ;next x position available below plants is 710
-;csoundoutput bounds(5, 710, 290, 200), text("Output")
-
-</Cabbage>
-<CsoundSynthesizer>
-<CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d
-</CsOptions>
-<CsInstruments>
-
-        sr = 48000
-	ksmps = 64
-	nchnls = 2
-	0dbfs = 1
-
-	giSine	ftgen	0, 0, 65536, 10, 1			; sine wave
-        gkhandle init -1
-        gkport init -1
-        ; list of source channels, used for checking which signals we are currently listening to
-        giSourceActive  ftgen 0, 0, 32, 2, 0    ; store the channel numbers (analysis instances) currently listened to
-
-#include "vst_mediator_parameter_ranges.inc"           ; instr 1
-#include "subscriber_connect.inc"                   ; instr 2,3
-#include "subscriber_receiver.inc"                  ; instr 4,5,6,7,8
-
-;****************************************************************
-; set OSC output port
-        instr 98
-        Soutport        chnget "output_port"
-        koutport        strtodk Soutport
-        printk2 koutport
-        kchanged        changed koutport
-        if kchanged > 0 then
-                        event "i", -99, 0.1, 1, koutport
-                        event "i", 99, 0.2, -1, koutport
-        endif
-        endin
-
-;****************************************************************
-; Mediator, send mixed and scaled parameter values as single values via OSC
-
-	instr 99
-        kparm1          chnget "parm1"
-        kparm2          chnget "parm2"
-        kparm3          chnget "parm3"
-        kparm4          chnget "parm4"
-        kparm5          chnget "parm5"
-        kparm6          chnget "parm6"
-        kparm7          chnget "parm7"
-        kparm8          chnget "parm8"
-
-        kparm1q         = int(kparm1*100)/100 ; quantize to limit OSC send speed (receiver may choke)
-        kparm2q         = int(kparm2*100)/100 
-        kparm3q         = int(kparm3*100)/100 
-        kparm4q         = int(kparm4*100)/100 
-        kparm5q         = int(kparm5*100)/100 
-        kparm6q         = int(kparm6*100)/100 
-        kparm7q         = int(kparm7*100)/100 
-        kparm8q         = int(kparm8*100)/100 
-        kchanged1       changed kparm1q
-        kchanged2       changed kparm2q
-        kchanged3       changed kparm3q
-        kchanged4       changed kparm4q
-        kchanged5       changed kparm5q
-        kchanged6       changed kparm6q
-        kchanged7       changed kparm7q
-        kchanged8       changed kparm8q
-
-        ktrig           metro 10
- 	ioutport	= p4
- 	Soutport        sprintf "using output port %i", ioutport
- 	                puts Soutport, 1
- 	                
-        OSCsend         kchanged1, "127.0.0.1", ioutport, "parm1", "f", kparm1
-        OSCsend         kchanged2, "127.0.0.1", ioutport, "parm2", "f", kparm2
-        OSCsend         kchanged3, "127.0.0.1", ioutport, "parm3", "f", kparm3
-        OSCsend         kchanged4, "127.0.0.1", ioutport, "parm4", "f", kparm4
-        OSCsend         kchanged5, "127.0.0.1", ioutport, "parm5", "f", kparm5
-        OSCsend         kchanged6, "127.0.0.1", ioutport, "parm6", "f", kparm6
-        OSCsend         kchanged7, "127.0.0.1", ioutport, "parm7", "f", kparm7
-        OSCsend         kchanged8, "127.0.0.1", ioutport, "parm8", "f", kparm8
-
-	endin
-
-</CsInstruments>
-<CsScore>
-f0 0.1 ; workaround so that the host VST scanning will not fail upon trying to open the same network port in several plugins
-s
-#define SCORELEN #86400#
-i1      0.1     1               ; init arrays
-i2	0.1	$SCORELEN
-#include "vst_mediator_score_events.inc"
-i98     0.2       $SCORELEN       ; OSC output port selector, starts instr 99
-e
-</CsScore>
-</CsoundSynthesizer>
-

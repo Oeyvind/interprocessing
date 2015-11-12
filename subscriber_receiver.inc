@@ -128,7 +128,9 @@
         Sflux           sprintf {{flux%i}}, isource_chan
         Sautocorr       sprintf {{autocorr%i}}, isource_chan
         Samp_trans      sprintf {{amp_trans%i}}, isource_chan
+        Samp_transdens  sprintf {{amp_t_dens%i}}, isource_chan
         Scentr_trans    sprintf {{centr_trans%i}}, isource_chan
+        Scentr_transdens sprintf {{centr_t_dens%i}}, isource_chan
         Skurt_trans     sprintf {{kurt_trans%i}}, isource_chan
         Spitchup_trans  sprintf {{pitchup_trans%i}}, isource_chan
         Spitchdown_trans sprintf {{pitchdown_trans%i}}, isource_chan
@@ -149,14 +151,16 @@
         kflux           init 0
         kautocorr       init 0
         kamp_trans      init 0
+        katransDensEnv  init 0
         kcentr_trans    init 0
+        kctransDensEnv  init 0
         kkurt_trans     init 0
         kpitchup_trans  init 0
         kpitchdwn_trans init 0
         kcps_raw        init 0
         
 nxt_val:
-    	kk		OSClisten gihandle, SoscName, "fffffffffffffffff", krms, krms_preEq, kcps, kpitch, kcentroid, kspread, kskewness, kurtosis, kflatness, kcrest, kflux, kamp_trans, kcentr_trans, kkurt_trans, kpitchup_trans, kpitchdwn_trans, kcps_raw
+    	kk		OSClisten gihandle, SoscName, "fffffffffffffffffff", krms, krms_preEq, kcps, kpitch, kcentroid, kspread, kskewness, kurtosis, kflatness, kcrest, kflux, kamp_trans, katransDensEnv, kcentr_trans, kctransDensEnv, kkurt_trans, kpitchup_trans, kpitchdwn_trans, kcps_raw
                 	chnset krms, Srms               	
                 	chnset krms_preEq, Srms_preEq
                         chnset kcps, Scps            
@@ -169,7 +173,9 @@ nxt_val:
                 	chnset kcrest, Screst          
                 	chnset kflux, Sflux           
                         chnset kamp_trans, Samp_trans          
+                        chnset katransDensEnv, Samp_transdens          
                         chnset kcentr_trans, Scentr_trans        
+                        chnset kctransDensEnv, Scentr_transdens          
                         chnset kkurt_trans, Skurt_trans
                         chnset kpitchup_trans, Spitchup_trans
                         chnset kpitchdwn_trans, Spitchdown_trans
@@ -220,8 +226,8 @@ transEnvelope:
         ; if not envelope triggering, then envelope follow filtering
 	krise   limit krise, 1/kr, 10
 	kfall   limit kfall, 1/kr, 10
-        kA      = exp(-6.90775527898 * (1/krise)/kr)
-        kB      = exp(-6.90775527898 * (1/kfall)/kr)
+        kA      = 0.001^(1/(krise*kr))
+        kB      = 0.001^(1/(kfall*kr))
         kfilt   init 0
         kfilt   = (kval_0>kfilt?(kval_0+(kA*(kfilt-kval_0))):(kval_0+(kB*(kfilt-kval_0))))
         kval    = kfilt

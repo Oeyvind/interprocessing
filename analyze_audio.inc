@@ -39,7 +39,10 @@
         k_env		downsamp a_env	
 
 	knoiseFloor_dB	chnget "inputNoisefloor"
-	kgate		= (dbfsamp(krms) < knoiseFloor_dB ? 0 : 1)	;  gate when very quiet (for sampholding centroid and pitch etc)
+	kgate		= (dbfsamp(krms) < knoiseFloor_dB ? 0 : 1)	;  gate when below noise floor (for sampholding centroid and pitch etc)
+        isecond_dB      = 9
+	kgate2		= (dbfsamp(krms) < knoiseFloor_dB+isecond_dB ? 0 : 1)	;  gate when close to noise floor (for sampholding centroid and pitch etc)
+        klowscaler      = limit(dbfsamp(krms)-knoiseFloor_dB, 0, isecond_dB)/isecond_dB      ; scaler to fade out different things towards the noise floor
         
 ; ***************
 ;analyze amplitude transients
@@ -51,16 +54,33 @@
 
 	krms_tran0, kdiff	TransientDetect dbfsamp(k_env), iresponse, ktthresh, klowThresh, kdecThresh, kdoubleLimit
 
+        ktime           timeinsts
+        kprevaTranTime  init 0
+        katranDensity   init 0
 ;Control segment for LEDs displaying transient detection:
-        ktrigButn	trigger	krms_tran0, 0.5, 0
-        kamp_trans init 0
+        ktrigButn       trigger	krms_tran0, 0.5, 0
+        ;kamp_trans init 0
         if ktrigButn > 0 then
+        katranTime      = ktime-kprevaTranTime
+        kprevaTranTime  = ktime
+        ;printk2 katranTime
+        katranDensity   divz 1, katranTime, 1
 	                reinit lightTransient
         endif
 lightTransient:
         kamp_trans      linseg 1,0.15,1,0,0,0
                         chnset kamp_trans, "transientDisplay"
 rireturn
+        katranDensity0   init 0
+        katranDensity    = katranDensity-(katranDensity0*5/kr) ; hipass
+        katranDensity0   = katranDensity
+        katranDensity1   = katranDensity*1.1
+        iatranrise       = 0.001
+	iatrandec        = 2
+        iA               = exp(-6.90775527898 * (1/iatranrise)/kr)
+        iB               = exp(-6.90775527898 * (1/iatrandec)/kr)
+        katransDensEnv   init 0
+        katransDensEnv   = (katranDensity1>katransDensEnv?(katranDensity1+(iA*(katransDensEnv-katranDensity1))):(katranDensity1+(iB*(katransDensEnv-katranDensity1))))
 
 ; ***************
 ; spectral analysis
@@ -69,7 +89,7 @@ rireturn
 	fsin 			pvsanal	a1, gifftsize, gifftsize/4, gifftsize, iwtype
 	kflag   		pvsftw	fsin,gifna,gifnf          	; export  amps  and freqs to table,
 
-	kupdateRate		= 1000	
+	kupdateRate		= 500
 	kmetro			metro kupdateRate
 	kdoflag			init 0
 	kdoflag			= (kdoflag + kmetro);*kgate
@@ -94,47 +114,45 @@ if (kdoflag > 0) && (kflag > 0) then
 	kcorrSum		= 0
 	kthisSum2		= 0
 	kprevSum2		= 0
-	;kMelAmps[]              init    33              ; amps for 32 mel freq bands
+	kMelAmps[]              init    33              ; amps for 32 mel freq bands
 
  process1:
 	kArrCorr[kindx]		= kArrA[kindx]*kArrAprev[kindx]
 	knormAmp		divz kArrA[kindx], ksumAmp, 0
 	kcentroid		= kcentroid + (kArrF[kindx]*knormAmp)
-	;kmelFq                  table kArrF[kindx], gifqToMelTab        ; get mel freq of this band
-	;kmelBand                table kmelFq, gi32melBands              ; get the mel band where this freq belongs (fractional value)
-        ;kmelBand1               = floor(kmelBand)
-	;kMelAmps[kmelBand1]     = kMelAmps[kmelBand1]+(kArrA[kindx]*(1-frac(kmelBand)))
-	;kMelAmps[kmelBand1+1]   = kMelAmps[kmelBand1+1]+(kArrA[kindx]*frac(kmelBand))
+	kmelFq                  table kArrF[kindx], gifqToMelTab        ; get mel freq of this band
+	kmelBand                table kmelFq, gi32melBands              ; get the mel band where this freq belongs (fractional value)
+        kmelBand1               = floor(kmelBand)
+	kMelAmps[kmelBand1]     = kMelAmps[kmelBand1]+(kArrA[kindx]*(1-frac(kmelBand)))
+	kMelAmps[kmelBand1+1]   = kMelAmps[kmelBand1+1]+(kArrA[kindx]*frac(kmelBand))
 	kindx 			= kindx + 1
   if kindx < giFftTabSize then
   kgoto process1
   endif
-	kcentroid		samphold kcentroid, kgate
-        kMelCepsInput[]		init    129
+        kMelCepsInput[]		init    128
         kindx                   = 0
-/*
+
 fillCeps:
-        
         kindx                   = kindx + 1
         kmelBandFq              table kindx, gi32melBandFqs
-        kMelCepsInput[kindx*2]  = log(kMelAmps[kindx])
+        kMelCepsInput[kindx*2]  = (kMelAmps[kindx])
         kMelCepsInput[(kindx*2)+1]  = kmelBandFq
   if kindx < 31 then
   kgoto fillCeps         
   endif
-        kMelCeps[]		init    129
-        kMelCepsIn[]		init    129
-        kMelCepsIn2[]		init    129
-        kMelCepsIn              = rfft(kMelCepsInput)
-        kMelCepsIn2             mags kMelCepsIn
-        kMelCeps                ceps kMelCepsInput, 33
-        
-        kmelceps_b1             = kMelCeps[1];sqrt((kMelCeps[0]^2)+(kMelCeps[1]^2))
-        kmelceps_b2             = kMelCeps[2];sqrt((kMelCeps[2]^2)+(kMelCeps[3]^2))
-        kmelceps_b3             = kMelCeps[4];sqrt((kMelCeps[4]^2)+(kMelCeps[5]^2))
-        kmelceps_b4             = kMelCeps[6];sqrt((kMelCeps[6]^2)+(kMelCeps[7]^2))
-*/
+        kMelCeps[]		init    128
+        kMelCepsIn[]		init    128
+        kMelCepsIn2[]		init    128
+/*
+        kMelCepsIn              ceps mags(rfft(kMelCepsInput)), 20
 
+        printk 0.4, kMelCepsInput[2]
+        kmelceps_b1             = kMelCepsIn[2];sqrt((kMelCeps[2]^2)+(kMelCeps[3]^2))
+        kmelceps_b2             = kMelCepsIn[4];sqrt((kMelCeps[4]^2)+(kMelCeps[5]^2))
+        kmelceps_b3             = kMelCepsIn[6];sqrt((kMelCeps[6]^2)+(kMelCeps[7]^2))
+        kmelceps_b4             = kMelCepsIn[8];sqrt((kMelCeps[8]^2)+(kMelCeps[9]^2))
+*/
+        
 ; separate loop for spread, skewness, kurtosis (as they depend on centroid being previously calculated) 
 	kindx 			= 0
 	kspread			= 0
@@ -160,18 +178,44 @@ fillCeps:
 	kflatness		divz exp(kflatlogsum/giFftTabSize),  (ksumAmp/giFftTabSize), 0
         kcrest			divz kmaxAmp, ksumAmp/giFftTabSize, 1
 	kflux_1			divz kcorrSum, (sqrt(kprevSum2)*sqrt(kthisSum2)), 1
-	kflux			= 1-kflux_1
+	kflux			= (1-kflux_1)
 	kdoflag 		= 0
 
+; ** filter hack to keep spectral signals at the value analyzed while sound level above noise floor
+	kcentroid		samphold kcentroid, kgate
+	kcentroid2		samphold kcentroid, kgate2
+        kcentroid               = (kgate2 > 0 ? kcentroid : kcentroid2-((kcentroid-kcentroid2)*((1-klowscaler)*0.25)))
+	kspread		        samphold kspread, kgate
+	kspread2		samphold kspread, kgate2
+        kspread                 = (kgate2 > 0 ? kspread : kspread2-((kspread-kspread2)*((1-klowscaler)*0.25)))
+	kskewness		samphold kskewness, kgate
+	kskewness2		samphold kskewness, kgate2
+        kskewness               = (kgate2 > 0 ? kskewness : kskewness2-((kskewness-kskewness2)*((1-klowscaler)*0.25)))
+	kurtosis		samphold kurtosis, kgate
+	kurtosis2		samphold kurtosis, kgate2
+        kurtosis                = (kgate2 > 0 ? kurtosis : kurtosis2-((kurtosis-kurtosis2)*((1-klowscaler)*0.25)))
+	kflatness		samphold kflatness, kgate
+	kflatness2		samphold kflatness, kgate2
+        kflatness               = (kgate2 > 0 ? kflatness : kflatness2-((kflatness-kflatness2)*((1-klowscaler)*0.25)))
+	kcrest		        samphold kcrest, kgate
+	kcrest2		        samphold kcrest, kgate2
+        kcrest                   = (kgate2 > 0 ? kcrest : kcrest2-((kcrest-kcrest2)*((1-klowscaler)*0.25)))
+	kflux		        samphold kflux, kgate
+	kflux2		        samphold kflux, kgate2
+        kflux                   = (kgate2 > 0 ? kflux : kflux2-((kflux-kflux2)*((1-klowscaler)*0.25)))
+
 endif
+
 	kautocorr		sumarray kArrCorr
 	krmsA			sumarray kArrA
 	krmsAprev		sumarray kArrAprev
 	kautocorr		divz kautocorr*2, krmsA*krmsAprev , 0
 
-; post filtering og spectral tracks
-        kcentroid               mediank kcentroid, 11, 11
-        kurtosis                mediank kurtosis, 11, 11
+; post filtering of spectral tracks
+        kcentroidf              tonek kcentroid, 20
+        kfluxf                  tonek kflux, 20
+        ;kcentroidf              mediank kcentroidf, 11, 11
+        ;kurtosis                mediank kurtosis, 11, 11
 
 ; ***************
 ; cepstrum
@@ -200,13 +244,19 @@ endif
         kcentro_env     init 0
         kcentro_env     = (kcentroid>kcentro_env?(kcentroid+(iA*(kcentro_env-kcentroid))):(kcentroid+(kB*(kcentro_env-kcentroid))))
 	kcentroct	= log2(kcentro_env)
+	;printk 0.4, kcentroct
 
 	kcentr_tran0, kcdiff	TransientDetect kcentroct, icresponse, kctthresh, kclowThresh, kcdecThresh, kcdoubleLimit
 
+        kprevcTranTime  init 0
+        kctranDensity   init 0
 ;Control segment for LEDs displaying transient detection:
         kctrigButn	trigger	kcentr_tran0, 0.5, 0
-        kcentr_trans    init 0
+        ;kcentr_trans    init 0
         if kctrigButn > 0 then
+        kctranTime      = ktime-kprevcTranTime
+        kprevcTranTime  = ktime
+        kctranDensity   divz 1, kctranTime, 1
 	                reinit clightTransient
         endif
 clightTransient:
@@ -214,13 +264,24 @@ clightTransient:
                         chnset kcentr_trans, "ctransientDisplay"
 rireturn
 
+        kctranDensity0   init 0
+        kctranDensity    = kctranDensity-(kctranDensity0*5/kr) ; hipass
+        kctranDensity0   = kctranDensity
+        kctranDensity1   = kctranDensity*1.1
+        ictranrise       = 0.001
+	ictrandec        = 2
+        iA               = exp(-6.90775527898 * (1/ictranrise)/kr)
+        iB               = exp(-6.90775527898 * (1/ictrandec)/kr)
+        kctransDensEnv   init 0
+        kctransDensEnv   = (kctranDensity1>kctransDensEnv?(kctranDensity1+(iA*(kctransDensEnv-kctranDensity1))):(kctranDensity1+(iB*(kctransDensEnv-kctranDensity1))))
+
 ; ***************
 ;analyze kurtosis transients
 	ikresponse	= 10 		                        ; response time in milliseconds
 	kktthresh	chnget "kurt_transientThresh"	        ; transient trig threshold 
 	kklowThresh	= 1		                        ; lower threshold for transient detection
 	kkdoubleLimit	chnget "kurt_transientDoubleLimit"	; minimum duration between events, (double trig limit)
-	kkdecTime	chnget "centro_transientDecTime" 	; envelope follower decay time
+	kkdecTime	chnget "kurt_transientDecTime" 	; envelope follower decay time
 	kkdecThresh	chnget "kurt_transientDecThresh" 	; retrig threshold, how much must the level decay from its local max before allowing new transient trig
 
         ikrise          = 0.001
@@ -341,10 +402,36 @@ rireturn
 ; normalization
         kcps_n          = divz(kcps, kpitch_high, 1)
         kpitch_n        = limit(divz(kcps-kpitch_low, kpitch_high-kpitch_low, 1), 0, 1)    ; normalized and offset
-        kcentroid_n     = kcentroid / (sr*0.25)
+        kcentroid_n     = kcentroidf / (sr*0.2)
         kspread_n       = kspread / (sr*0.25)
         kskewness_n     = kskewness / 7
-        kurtosis_n      = kurtosis / 18
+        kurtosis_n      = kurtosis / 15
         kcrest_n        = kcrest / 250
-        kflux_n         = kflux * 4
+        kflux_n         = kfluxf * 4
         kautocorr_n     = kautocorr * 2
+
+; auto-normalize
+        kcalibrate      chnget "autocalibrate"
+        kreset          trigger kcalibrate, 0.5, 0
+        knormalize      chnget "autonormalize"
+        ;krms           AutoNormalize krms, kreset, kcalibrate, knormalize
+        ;krms_preEq     AutoNormalize krms_preEq, kreset, kcalibrate, knormalize
+        kpitch_a        AutoNormalize kpitch_n, kreset, kcalibrate, knormalize
+        kcentroid_a     AutoNormalize kcentroid_n, kreset, kcalibrate, knormalize
+        kspread_a       AutoNormalize kspread_n, kreset, kcalibrate, knormalize
+        kskewness_a     AutoNormalize kskewness_n, kreset, kcalibrate, knormalize
+        kurtosis_a      AutoNormalize kurtosis_n, kreset, kcalibrate, knormalize
+        kflatness_a     AutoNormalize kflatness, kreset, kcalibrate, knormalize
+        kcrest_a        AutoNormalize kcrest_n, kreset, kcalibrate, knormalize
+        kflux_a         AutoNormalize kflux_n, kreset, kcalibrate, knormalize
+
+        krms            limit krms, 0, 1
+        krms_preEq      limit krms_preEq, 0, 1
+        kpitch_a        limit kpitch_a, 0, 1
+        kcentroid_a     limit kcentroid_a, 0, 1
+        kspread_a       limit kspread_a, 0, 1
+        kskewness_a     limit kskewness_a, 0, 1
+        kurtosis_a      limit kurtosis_a, 0, 1
+        kflatness_a     limit kflatness_a, 0, 1
+        kcrest_a        limit kcrest_a, 0, 1
+        kflux_a         limit kflux_a, 0, 1

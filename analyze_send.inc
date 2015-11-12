@@ -20,13 +20,11 @@
         SoscName        sprintf {{/%s%i}}, "analysis", ichan
 	kwhen           init 0
 	kcountwhen      init 0
-	kcountwhen      = (kcountwhen+1)%4   ; send on every 4th k-rate period
+	kcountwhen      = (kcountwhen+1)%4   ; send on every Nth k-rate period
 	kwhen           = (kcountwhen == 1 ? kwhen+1 : kwhen)
-;	kwhen           = (kwhen+1)%2   ; send on every k-rate period
 #define PUBLISH(N) #
 	iport$N.	= ibaseport + $N.
-        OSCsend         kwhen, "127.0.0.1", iport$N., SoscName, "fffffffffffffffff", krms, krms_preEq, kcps_n, kpitch_n, kcentroid_n, kspread_n, kskewness_n, kurtosis_n, kflatness, kcrest_n, kflux_n, kamp_trans, kcentr_trans, kkurt_trans, kpitchup_trans, kpitchdwn_trans, kcps ; (the kcps value is raw, not normalized!)
-
+        OSCsend         kwhen, "127.0.0.1", iport$N., SoscName, "fffffffffffffffffff", krms, krms_preEq, kcps_n, kpitch_a, kcentroid_a, kspread_a, kskewness_a, kurtosis_a, kflatness_a, kcrest_a, kflux_a, kamp_trans, katransDensEnv, kcentr_trans, kctransDensEnv, kkurt_trans, kpitchup_trans, kpitchdwn_trans, kcps ; (the kcps value is raw, not normalized!)
 #
 $PUBLISH(0)
 $PUBLISH(1)
@@ -38,5 +36,6 @@ $PUBLISH(6)
 $PUBLISH(7)
 $PUBLISH(8)
 $PUBLISH(9)
+
         
         

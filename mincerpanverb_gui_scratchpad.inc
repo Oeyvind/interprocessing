@@ -1,5 +1,5 @@
 groupbox bounds(5, 30, 564, 81), plant("plant_inlevel"), linethickness("0"){ 
-combobox channel("source1_inlevel"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_inlevel"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_inlevel"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_inlevel"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_inlevel"), range(0.01, 10.0, 0.5)
@@ -7,7 +7,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_inlevel"), range(-1.0, 1.0, 0, 
 button bounds(320, 12, 29, 19), channel("scale1_x_inlevel"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_inlevel"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_inlevel"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_inlevel"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_inlevel"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_inlevel"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_inlevel"), range(0.01, 10.0, 0.5)
@@ -28,7 +28,7 @@ rslider bounds(494, 8, 66, 66), text("inlevel"), channel("inlevel"), range(0, 1.
 }
 
 groupbox bounds(5, 115, 564, 81), plant("plant_mincertime"), linethickness("0"){ 
-combobox channel("source1_mincertime"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_mincertime"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_mincertime"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_mincertime"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_mincertime"), range(0.01, 10.0, 0.5)
@@ -36,7 +36,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_mincertime"), range(-1.0, 1.0, 
 button bounds(320, 12, 29, 19), channel("scale1_x_mincertime"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_mincertime"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_mincertime"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_mincertime"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_mincertime"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_mincertime"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_mincertime"), range(0.01, 10.0, 0.5)
@@ -57,7 +57,7 @@ rslider bounds(494, 8, 66, 66), text("mincertime"), channel("mincertime"), range
 }
 
 groupbox bounds(5, 200, 564, 81), plant("plant_mincerpitch"), linethickness("0"){ 
-combobox channel("source1_mincerpitch"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_mincerpitch"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_mincerpitch"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_mincerpitch"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_mincerpitch"), range(0.01, 10.0, 0.5)
@@ -65,7 +65,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_mincerpitch"), range(-1.0, 1.0,
 button bounds(320, 12, 29, 19), channel("scale1_x_mincerpitch"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_mincerpitch"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_mincerpitch"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_mincerpitch"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_mincerpitch"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_mincerpitch"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_mincerpitch"), range(0.01, 10.0, 0.5)
@@ -86,7 +86,7 @@ rslider bounds(494, 8, 66, 66), text("mincerpitch"), channel("mincerpitch"), ran
 }
 
 groupbox bounds(5, 285, 564, 81), plant("plant_mincerfeed"), linethickness("0"){ 
-combobox channel("source1_mincerfeed"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_mincerfeed"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_mincerfeed"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_mincerfeed"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_mincerfeed"), range(0.01, 10.0, 0.5)
@@ -94,7 +94,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_mincerfeed"), range(-1.0, 1.0, 
 button bounds(320, 12, 29, 19), channel("scale1_x_mincerfeed"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_mincerfeed"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_mincerfeed"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_mincerfeed"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_mincerfeed"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_mincerfeed"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_mincerfeed"), range(0.01, 10.0, 0.5)
@@ -115,7 +115,7 @@ rslider bounds(494, 8, 66, 66), text("mincerfeed"), channel("mincerfeed"), range
 }
 
 groupbox bounds(5, 370, 564, 81), plant("plant_mincermix"), linethickness("0"){ 
-combobox channel("source1_mincermix"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_mincermix"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_mincermix"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_mincermix"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_mincermix"), range(0.01, 10.0, 0.5)
@@ -123,7 +123,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_mincermix"), range(-1.0, 1.0, 0
 button bounds(320, 12, 29, 19), channel("scale1_x_mincermix"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_mincermix"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_mincermix"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_mincermix"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_mincermix"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_mincermix"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_mincermix"), range(0.01, 10.0, 0.5)
@@ -144,7 +144,7 @@ rslider bounds(494, 8, 66, 66), text("mincermix"), channel("mincermix"), range(0
 }
 
 groupbox bounds(5, 455, 564, 81), plant("plant_Pan"), linethickness("0"){ 
-combobox channel("source1_Pan"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_Pan"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_Pan"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_Pan"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_Pan"), range(0.01, 10.0, 0.5)
@@ -152,7 +152,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_Pan"), range(-1.0, 1.0, 0, 1, 0
 button bounds(320, 12, 29, 19), channel("scale1_x_Pan"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_Pan"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_Pan"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_Pan"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_Pan"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_Pan"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_Pan"), range(0.01, 10.0, 0.5)
@@ -173,7 +173,7 @@ rslider bounds(494, 8, 66, 66), text("Pan"), channel("Pan"), range(0.0, 1.0, 0.5
 }
 
 groupbox bounds(5, 540, 564, 81), plant("plant_panMix"), linethickness("0"){ 
-combobox channel("source1_panMix"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_panMix"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_panMix"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_panMix"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_panMix"), range(0.01, 10.0, 0.5)
@@ -181,7 +181,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_panMix"), range(-1.0, 1.0, 0, 1
 button bounds(320, 12, 29, 19), channel("scale1_x_panMix"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_panMix"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_panMix"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_panMix"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_panMix"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_panMix"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_panMix"), range(0.01, 10.0, 0.5)
@@ -202,7 +202,7 @@ rslider bounds(494, 8, 66, 66), text("panMix"), channel("panMix"), range(0.0, 1.
 }
 
 groupbox bounds(5, 625, 564, 81), plant("plant_reverbtime"), linethickness("0"){ 
-combobox channel("source1_reverbtime"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_reverbtime"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_reverbtime"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_reverbtime"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_reverbtime"), range(0.01, 10.0, 0.5)
@@ -210,7 +210,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_reverbtime"), range(-1.0, 1.0, 
 button bounds(320, 12, 29, 19), channel("scale1_x_reverbtime"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_reverbtime"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_reverbtime"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_reverbtime"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_reverbtime"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_reverbtime"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_reverbtime"), range(0.01, 10.0, 0.5)
@@ -231,7 +231,7 @@ rslider bounds(494, 8, 66, 66), text("reverbtime"), channel("reverbtime"), range
 }
 
 groupbox bounds(5, 710, 564, 81), plant("plant_reverbdamp"), linethickness("0"){ 
-combobox channel("source1_reverbdamp"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_reverbdamp"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_reverbdamp"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_reverbdamp"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_reverbdamp"), range(0.01, 10.0, 0.5)
@@ -239,7 +239,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_reverbdamp"), range(-1.0, 1.0, 
 button bounds(320, 12, 29, 19), channel("scale1_x_reverbdamp"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_reverbdamp"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_reverbdamp"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_reverbdamp"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_reverbdamp"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_reverbdamp"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_reverbdamp"), range(0.01, 10.0, 0.5)
@@ -260,7 +260,7 @@ rslider bounds(494, 8, 66, 66), text("reverbdamp"), channel("reverbdamp"), range
 }
 
 groupbox bounds(5, 795, 564, 81), plant("plant_reverbmix"), linethickness("0"){ 
-combobox channel("source1_reverbmix"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_reverbmix"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_reverbmix"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_reverbmix"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_reverbmix"), range(0.01, 10.0, 0.5)
@@ -268,7 +268,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_reverbmix"), range(-1.0, 1.0, 0
 button bounds(320, 12, 29, 19), channel("scale1_x_reverbmix"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_reverbmix"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_reverbmix"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_reverbmix"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_reverbmix"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_reverbmix"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_reverbmix"), range(0.01, 10.0, 0.5)

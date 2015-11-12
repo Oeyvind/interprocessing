@@ -16,12 +16,12 @@
 ;    If not, see <http://www.gnu.org/licenses/>.
 
 <Cabbage>
-form size(575, 455), caption("Mincer Time"), pluginID("mint")
+form size(675, 455), caption("Mincer Time2"), pluginID("min2")
 ;image bounds(0, 0, 575, 455), file("background.jpg"), shape("round")
 label text("port"), bounds(10, 10, 80, 12), identchannel("port_id")
 
 groupbox bounds(5, 30, 564, 81), plant("plant_inlevel"), linethickness("0"){ 
-combobox channel("source1_inlevel"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_inlevel"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_inlevel"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_inlevel"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_inlevel"), range(0.01, 10.0, 0.5)
@@ -29,7 +29,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_inlevel"), range(-1.0, 1.0, 0, 
 button bounds(320, 12, 29, 19), channel("scale1_x_inlevel"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_inlevel"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_inlevel"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_inlevel"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_inlevel"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_inlevel"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_inlevel"), range(0.01, 10.0, 0.5)
@@ -50,7 +50,7 @@ rslider bounds(494, 8, 66, 66), text("inlevel"), channel("inlevel"), range(0, 1.
 }
 
 groupbox bounds(5, 115, 564, 81), plant("plant_timpoint"), linethickness("0"){ 
-combobox channel("source1_timpoint"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_timpoint"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_timpoint"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_timpoint"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_timpoint"), range(0.01, 10.0, 0.5)
@@ -58,7 +58,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_timpoint"), range(-1.0, 1.0, 0,
 button bounds(320, 12, 29, 19), channel("scale1_x_timpoint"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_timpoint"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_timpoint"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_timpoint"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_timpoint"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_timpoint"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_timpoint"), range(0.01, 10.0, 0.5)
@@ -78,8 +78,10 @@ combobox bounds(433, 1, 55, 12), channel("offsetx_timpoint"), items("-1", "Nornm
 rslider bounds(494, 8, 66, 66), text("timpoint"), channel("timpoint"), range(0, 0.99, 0.1, 0.4, 0.001)
 }
 
+rslider bounds(580, 123, 66, 66), text("timpoint1"), channel("timpoint1"), range(0, 0.99, 0.1, 1, 0.001)
+
 groupbox bounds(5, 200, 564, 81), plant("plant_pitch"), linethickness("0"){ 
-combobox channel("source1_pitch"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_pitch"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_pitch"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_pitch"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_pitch"), range(0.01, 10.0, 0.5)
@@ -87,7 +89,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_pitch"), range(-1.0, 1.0, 0, 1,
 button bounds(320, 12, 29, 19), channel("scale1_x_pitch"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_pitch"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_pitch"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_pitch"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_pitch"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_pitch"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_pitch"), range(0.01, 10.0, 0.5)
@@ -108,7 +110,7 @@ rslider bounds(494, 8, 66, 66), text("pitch"), channel("pitch"), range(0.0, 2.0,
 }
 
 groupbox bounds(5, 285, 564, 81), plant("plant_feedback"), linethickness("0"){ 
-combobox channel("source1_feedback"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_feedback"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_feedback"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_feedback"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_feedback"), range(0.01, 10.0, 0.5)
@@ -116,7 +118,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_feedback"), range(-1.0, 1.0, 0,
 button bounds(320, 12, 29, 19), channel("scale1_x_feedback"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_feedback"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_feedback"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_feedback"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_feedback"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_feedback"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_feedback"), range(0.01, 10.0, 0.5)
@@ -137,7 +139,7 @@ rslider bounds(494, 8, 66, 66), text("feedback"), channel("feedback"), range(0.0
 }
 
 groupbox bounds(5, 370, 564, 81), plant("plant_mix"), linethickness("0"){ 
-combobox channel("source1_mix"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source1_mix"), bounds(10, 12, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan1_mix"), bounds(103, 12, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 14, 35, 15), channel("rise1_mix"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 14, 35, 15), channel("fall1_mix"), range(0.01, 10.0, 0.5)
@@ -145,7 +147,7 @@ hslider bounds(233, 12, 86, 20), channel("scale1_mix"), range(-1.0, 1.0, 0, 1, 0
 button bounds(320, 12, 29, 19), channel("scale1_x_mix"), text("x 1","x 10"), 
 hslider bounds(349, 12, 86, 20), channel("curve1_mix"), range(-5.0, 5.0, 0)
 
-combobox channel("source2_mix"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "amp_t_dens", "centr_trans", "centr_t_dens", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
+combobox channel("source2_mix"), bounds(10, 34, 90, 20), items("rms", "rms_preEq", "cps", "pitch", "centroid", "spread", "skewness", "kurtosis", "flatness", "crest", "flux", "amp_trans", "centr_trans", "kurt_trans", "pitchup_trans", "pitchdown_trans", "cps_raw"), value(1), channeltype("string")
 combobox channel("chan2_mix"), bounds(103, 34, 50, 20), items("1", "2", "3", "4"), value(1)
 numberbox bounds(158, 36, 35, 15), channel("rise2_mix"), range(0.01, 10.0, 0.01)
 numberbox bounds(196, 36, 35, 15), channel("fall2_mix"), range(0.01, 10.0, 0.5)
@@ -223,9 +225,43 @@ rslider bounds(494, 8, 66, 66), text("mix"), channel("mix"), range(0, 1.0, 1, 0.
         instr 99
         ifftsize        = 1024
         ktimptM chnget "timpoint"
+        ktimptM_old     init 0
+        ktimpt1         init 0
+        ktimpt_slope    init 0
+        ktimpt_slope    = (ktimptM-ktimptM_old != 0 ? ktimptM-ktimptM_old : ktimpt_slope)
+     ;   ktimpt1         limit ktimpt1+(ktimpt_slope/(kr*4)), 0, 1
+        ;printk2 ktimpt_slope
+        kfallspeed      = 5
+        if ktimptM == 0 then 
+        ktimpt1         = ktimpt1*0.99
+        else
+        ktimpt1         limit (ktimpt_slope>0 ? ktimpt1 + (ktimptM/(kr)):ktimpt1 + kfallspeed*(1-ktimptM)*(ktimpt_slope/(kr))), 0, 1
+        endif
+        ktimptM_old     = ktimptM
+;        ktimpt1         limit (ktimpt1 + (ktimptM/(kr*giLiveFeedLenSec)))*ktimptM*1/ktimptM, 0, 1
+/*
+        ktimpt1         limit (ktimpt1 + (ktimptM/(kr)))*ktimptM*1/ktimptM, 0, 1
+        krise	        = 0.0000001
+        kfall	        = 0.0000001
+        krise           limit krise, 1/kr, 10
+        kfall           limit kfall, 1/kr, 10
+        kA              = 0.001^(1/(krise*kr))
+        kB              = 0.001^(1/(kfall*kr))
+        kfilt           init 0
+        ktimpnt2        init 0
+        ; if value increase: increment, else decrement
+        kfilt           = (ktimpt1>ktimpnt2?(ktimpt1+(kA*(ktimpnt2-ktimpt1))):(ktimpt1+(kB*(ktimpnt2-ktimpt1))))
+        ktimpnt2        = ktimpt1
+        ktimpt1         = kfilt
+*/
+                                                  chnset ktimpt1, "timpoint1"
+                         
         kpitch  chnget "pitch"
         ktimpt phasor 1/giLiveFeedLenSec
-        atimpt  interp (-ktimptM*giLiveFeedLenSec)+(gkstartFollow/sr)-((ifftsize/sr)*kpitch)
+        ;kdev    rnd31 0.001, 1
+        ;kdev    butterlp kdev, 5
+        ;ktimpt1 limit ktimpt1 + kdev, 0, 1
+        atimpt  interp (-ktimpt1*giLiveFeedLenSec)+(gkstartFollow/sr)-((ifftsize/sr)*kpitch)
         klock   = 1
         a1 mincer atimpt, 1, kpitch, giLiveFeed, klock, ifftsize
                 chnset a1, "afeedback"
@@ -243,7 +279,7 @@ s
 #define SCORELEN #86400#
 i1      0.1     1               ; init arrays
 i2	0.1	$SCORELEN
-#include "mincertime_score_events.inc"
+;#include "mincertime_score_events.inc"
 i98     0       $SCORELEN       ; record to buffer
 i99     0       $SCORELEN       ; mincer
 e

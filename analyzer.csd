@@ -16,8 +16,8 @@
 ;    If not, see <http://www.gnu.org/licenses/>.
 
 <Cabbage>
-form size(365, 750), caption("Analyzer"), pluginID("anlz")
-image bounds(0, 0, 365, 500), file("background.jpg"), shape("round")
+form size(740, 750), caption("Analyzer"), pluginID("anlz")
+image bounds(0, 0, 740, 500), file("background.jpg"), shape("round")
 
 label text("channel"), bounds(15, 16, 75, 12)
 combobox channel("chan"), bounds(80, 12, 60, 25), items("1", "2", "3", "4"), value(1)
@@ -27,11 +27,19 @@ label text("pitch track method"), bounds(90, 50, 120, 12)
 combobox channel("pitchmethod"), bounds(90, 68, 120, 15), items("ptrack", "plltrack", "pitchamdf", "epoch"), value(1)
 button channel("pitchMonitor"),bounds(90, 88, 120, 15), text("pitch monitor"), colour:0("black"), colour:1("green"), latching(1)
 
+checkbox channel("pause"),bounds(220, 5, 15, 15), value(0)
+label bounds(170, 5, 50, 12), text("pause"),  colour(50, 50, 50, 255)
+checkbox channel("enableDisplay"),bounds(345, 5, 15, 15), value(0)
+label bounds(255, 5, 90, 12), text("enableDisplay"),  colour(50, 50, 50, 255)
+
+checkbox channel("autonormalize"),bounds(220, 20, 15, 15), value(0)
+label bounds(170, 20, 50, 12), text("normalize"),  colour(50, 50, 50, 255)
+checkbox channel("autocalibrate"),bounds(345, 20, 15, 15), value(0)
+label bounds(255, 20, 90, 12), text("calibrate"),  colour(50, 50, 50, 255)
+
 rslider bounds(220, 40, 65, 65), text("pFiltSize"), channel("pitchFilterSize"), range(3, 255, 25, 0.3, 1) 
-;texteditor bounds(290, 43, 45, 15), channel("pitch_high"), text(1200)
-;texteditor bounds(290, 64, 45, 15), channel("pitch_low"), text(100)
-numberbox bounds(290, 43, 60, 15), channel("pitch_high"), range(50, 2000, 1200)
-numberbox bounds(290, 64, 60, 15), channel("pitch_low"), range(50, 2000, 100)
+numberbox bounds(290, 43, 60, 15), channel("pitch_high"), range(50, 2000, 800)
+numberbox bounds(290, 64, 60, 15), channel("pitch_low"), range(50, 2000, 150)
 label bounds(290, 89, 50, 12), text("p range"),  colour(50, 50, 50, 255)
 
 label bounds(15, 120, 202, 12), text("pre emphasis for amp trans)"),  colour(50, 50, 50, 255)
@@ -69,6 +77,36 @@ label text("pitch"), bounds(12, 429, 70, 12)
 checkbox channel("puptransientDisplay"),bounds(42, 445, 15, 15), value(0)
 checkbox channel("pdwntransientDisplay"),bounds(42, 460, 15, 15), value(0)
 
+gentable bounds(370,  5, 320, 240), identchannel("displays"), tablenumber(1), tablecolour("lightblue"), tablegridcolour(0,0,0,0), amprange(-.03,1,1), zoom(-1), samplerange(0,16)
+image bounds(370, 5, 80,240), shape("sharp"), colour(175, 50,255, 40), identchannel("group1")	
+label text("noisefloor"), bounds(385, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+label text("krms"), bounds(405, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+label text("cps"), bounds(425, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+label text("pitch"), bounds(445, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+
+image bounds(450, 5, 80,240), shape("sharp"), colour(75,255, 75, 40), identchannel("group2")	
+label text("centroid"), bounds(465, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+label text("spread"), bounds(485, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+label text("skewness"), bounds(505, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+label text("kurtosis"), bounds(525, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+
+image bounds(530, 5, 60,240), shape("sharp"), colour(45, 45,255, 40), identchannel("group3")	
+label text("flatness"), bounds(545, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+label text("crest"), bounds(565, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+label text("flux"), bounds(585, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+
+image bounds(590, 5, 100,240), shape("sharp"), colour(255,255, 50, 20), identchannel("group4")	
+;label text("amp_t"), bounds(605, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+;label text("centr_t"), bounds(625, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+;label text("kurt_t"), bounds(645, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+;label text("pup_t"), bounds(665, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+;label text("pdwn_t"), bounds(685, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+
+label text("amp transient density"), bounds(370, 340, 200, 15), align("left")
+label text("0"), bounds(370, 360, 200, 15), align("left"), identchannel("ampTransDensity")	
+label text("centr transient density"), bounds(370, 380, 200, 15), align("left")
+label text("0"), bounds(370, 400, 200, 15), align("left"), identchannel("cenTransDensity")	
+
 csoundoutput bounds(5, 500, 290, 250), text("Output")
 </Cabbage>
 <CsoundSynthesizer>
@@ -79,17 +117,18 @@ csoundoutput bounds(5, 500, 290, 250), text("Output")
 <CsInstruments>
 
         sr = 48000
-        ksmps = 256
+        ksmps = 128
 	nchnls = 2
 	0dbfs = 1
 
+        gi1     ftgen   1, 0, 16, -2, 0 
 	giSine	ftgen	0, 0, 65536, 10, 1			; sine wave
 	gifftsize 	= 1024
 			chnset gifftsize, "fftsize"
 	giFftTabSize	= (gifftsize / 2)+1
 	gifna     	ftgen   1 ,0 ,giFftTabSize, 7, 0, giFftTabSize, 0   	; for pvs analysis
 	gifnf     	ftgen   2 ,0 ,giFftTabSize, 7, 0, giFftTabSize, 0   	; for pvs analysis
-/*
+
         gifqToMelMax    = 16384
         gifqToMelTab    ftgen   0, 0, gifqToMelMax, 2, 0        ; table to be filled with mel frequency map
         gimelMax        = 1125*log(1+(gifqToMelMax/700))
@@ -97,7 +136,7 @@ csoundoutput bounds(5, 500, 290, 250), text("Output")
         gi32melBands    ftgen   0, 0, 4096, -7, 0, gimelMax, 31, 4096-gimelMax, 31      ; divide mel scale evenly into 32 bands
         gi32melFqs      ftgen   0, 0, 32, -7, 0, 32, gimelMax                           ; mel frequencies for the 32 bands
         gi32melBandFqs  ftgen   0, 0, 32, 2, 0                                          ; to be filled with the frequencies for those 32 mel frequencies
-*/
+
 #include "analyze_udos.inc"
 
 ;**************************
@@ -109,8 +148,39 @@ csoundoutput bounds(5, 500, 290, 250), text("Output")
         instr 2
 	a1,a2	        ins
 ;	                outs a1, a2
+        kpause chnget "pause"
+        if kpause > 0 kgoto skip
 
 #include "analyze_audio.inc"
+
+; analysis sig display in gui table
+        tablew pow(ampdbfs(knoiseFloor_dB),0.4), 0, gi1 
+        tablew pow(krms,0.4), 1, gi1 
+        tablew kcps_n, 2, gi1 
+        tablew kpitch_a, 3, gi1 
+        tablew kcentroid_a, 4, gi1 
+        tablew kspread_a, 5, gi1 
+        tablew kskewness_a, 6, gi1 
+        tablew kurtosis_a, 7, gi1 
+        tablew kflatness_a, 8, gi1 
+        tablew kcrest_a, 9, gi1 
+        tablew kflux_a, 10, gi1 
+        /*
+        tablew kmelceps_b1, 11, gi1
+        tablew kmelceps_b2, 12, gi1
+        tablew kmelceps_b3, 13, gi1
+        tablew kmelceps_b4, 14, gi1
+        */
+        kupd    metro 30
+        kenableDisplay chnget "enableDisplay"
+        if kupd*kenableDisplay > 0 then
+ 	chnset	"tablenumber(1)", "displays"	; update table display	
+ 	SatranD sprintfk "text(%.1f)", katransDensEnv
+ 	chnset	SatranD, "ampTransDensity"	; update gui	
+ 	SctranD sprintfk "text(%.1f)", kctransDensEnv
+ 	chnset	SctranD, "cenTransDensity"	; update gui	
+        endif
+
         kchan           chnget "chan"
         kchanged        changed kchan
         if kchanged > 0 then
@@ -121,6 +191,7 @@ send:
         kmonitor        chnget "pitchMonitor"
         atest           oscili interp(krms)*kmonitor, kcps, giSine
                         outs atest, atest
+skip:
         endin
 
 ;**************************
