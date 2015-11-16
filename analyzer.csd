@@ -165,6 +165,69 @@ csoundoutput bounds(5, 500, 290, 250), text("Output")
         tablew kflatness_a, 8, gi1 
         tablew kcrest_a, 9, gi1 
         tablew kflux_a, 10, gi1 
+
+/*        
+        inormsize       = kr*4
+        kNormArr[]      init inormsize
+        kcalibrate      chnget "autocalibrate"
+        kreset          trigger kcalibrate, 0.5, 0
+        kval            = pow(krms,0.4);kcentroid_a
+        kval_max        init 0
+        kval_min        init 2^64
+        kval_min_ok     init 0
+        kval_max_ok     init 0
+        kqMaxval        init 0
+        kqMinval        init 2^64
+        kqhighthresh    = 0.9
+        kqlowthresh     = 0.1
+        knormindex      init 0
+        kcalibrated     init 0
+        if kreset > 0 then
+        kqMaxval        = 0
+        kqMinval        = 2^64
+        kqMax           = 0
+        kqMin           = 2^64
+        kval_max        = 0
+        kval_min        = 2^64
+        knormindex      = 0
+        kcalibrated     = 0
+        endif
+        if kcalibrate > 0 then
+          norm:
+          kNormArr[knormindex] = kval
+          knormindex += 1
+          if knormindex == inormsize then
+            knormindex2 = 0
+            interquartile:
+            kqMax,kqMaxIndx maxarray kNormArr
+            kqMaxval max kqMaxval, kqMax
+            if kqMax > kqMaxval*kqhighthresh then
+              kNormArr[kqMaxIndx] = kqMax*kqhighthresh
+            endif
+            kqMin,kqMinIndx minarray kNormArr
+            if kqMin < kqMaxval*kqlowthresh then ; lowthresh relative to max
+              kNormArr[kqMinIndx] = kqMaxval*kqlowthresh
+            endif
+            knormindex2 += 1
+            if knormindex2 < inormsize then
+              kgoto interquartile
+            endif
+            kqMax maxarray kNormArr
+            kqMin minarray kNormArr
+            kcalibrated = 1
+            knormindex = 0
+          endif
+        endif
+        kval_max        max kval_max, kqMax
+        kval_min        min kval_min, kqMin
+        if kcalibrated > 0 then
+        kval_min_ok     = kval_min
+        kval_max_ok     = kval_max
+        endif
+ */       
+        ;tablew kval_min_ok, 11, gi1
+        ;tablew kval_max_ok, 12, gi1
+
         /*
         tablew kmelceps_b1, 11, gi1
         tablew kmelceps_b2, 12, gi1

@@ -96,7 +96,7 @@ double:
 
 ;***************************************************
 ; auto normalize udo
-        opcode AutoNormalize, k, kkkk
+        opcode AutoNormalize0, k, kkkk
         kval, kreset, kcalibrate, knormalize xin 
         kval_max        init 0
         kval_min        init 2^64
@@ -110,6 +110,70 @@ double:
         endif
         if knormalize > 0 then
         kval_n          = (kval-kval_min)*divz(1,(kval_max-kval_min), 1)
+        else
+        kval_n          = kval
+        endif
+        xout kval_n
+        endop
+
+        opcode AutoNormalize, k, kkkki
+        kval, kreset, kcalibrate, knormalize, iperiod xin 
+        inormsize       = kr*iperiod
+        kNormArr[]      init inormsize
+        kval_max        init 0
+        kval_min        init 2^64
+        kval_min_ok     init 0
+        kval_max_ok     init 0
+        kqMaxval        init 0
+        kqMinval        init 2^64
+        kqhighthresh    = 0.9
+        kqlowthresh     = 0.1
+        knormindex      init 0
+        kcalibrated     init 0
+        if kreset > 0 then
+        kqMaxval        = 0
+        kqMinval        = 2^64
+        kqMax           = 0
+        kqMin           = 2^64
+        kval_max        = 0
+        kval_min        = 2^64
+        knormindex      = 0
+        kcalibrated     = 0
+        endif
+        if kcalibrate > 0 then
+          norm:
+          kNormArr[knormindex] = kval
+          knormindex += 1
+          if knormindex == inormsize then
+            knormindex2 = 0
+            interquartile:
+            kqMax,kqMaxIndx maxarray kNormArr
+            kqMaxval max kqMaxval, kqMax
+            if kqMax > kqMaxval*kqhighthresh then
+              kNormArr[kqMaxIndx] = kqMax*kqhighthresh
+            endif
+            kqMin,kqMinIndx minarray kNormArr
+            if kqMin < kqMaxval*kqlowthresh then ; lowthresh relative to max
+              kNormArr[kqMinIndx] = kqMaxval*kqlowthresh
+            endif
+            knormindex2 += 1
+            if knormindex2 < inormsize then
+              kgoto interquartile
+            endif
+            kqMax maxarray kNormArr
+            kqMin minarray kNormArr
+            kcalibrated = 1
+            knormindex = 0
+          endif
+        endif
+        kval_max        max kval_max, kqMax
+        kval_min        min kval_min, kqMin
+        if kcalibrated > 0 then
+        kval_min_ok     = kval_min
+        kval_max_ok     = kval_max
+        endif
+        if knormalize > 0 then
+        kval_n          = (kval-kval_min_ok)*divz(1,(kval_max_ok-kval_min_ok), 1)
         else
         kval_n          = kval
         endif

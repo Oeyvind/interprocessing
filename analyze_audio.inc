@@ -414,16 +414,17 @@ rireturn
         kcalibrate      chnget "autocalibrate"
         kreset          trigger kcalibrate, 0.5, 0
         knormalize      chnget "autonormalize"
-        ;krms           AutoNormalize krms, kreset, kcalibrate, knormalize
-        ;krms_preEq     AutoNormalize krms_preEq, kreset, kcalibrate, knormalize
-        kpitch_a        AutoNormalize kpitch_n, kreset, kcalibrate, knormalize
-        kcentroid_a     AutoNormalize kcentroid_n, kreset, kcalibrate, knormalize
-        kspread_a       AutoNormalize kspread_n, kreset, kcalibrate, knormalize
-        kskewness_a     AutoNormalize kskewness_n, kreset, kcalibrate, knormalize
-        kurtosis_a      AutoNormalize kurtosis_n, kreset, kcalibrate, knormalize
-        kflatness_a     AutoNormalize kflatness, kreset, kcalibrate, knormalize
-        kcrest_a        AutoNormalize kcrest_n, kreset, kcalibrate, knormalize
-        kflux_a         AutoNormalize kflux_n, kreset, kcalibrate, knormalize
+        iperiod         = 4
+        ;krms           AutoNormalize krms, kreset, kcalibrate, knormalize, iperiod
+        ;krms_preEq     AutoNormalize krms_preEq, kreset, kcalibrate, knormalize, iperiod
+        kpitch_a        AutoNormalize kpitch_n, kreset, kcalibrate, knormalize, iperiod
+        kcentroid_a     AutoNormalize kcentroid_n, kreset, kcalibrate, knormalize, iperiod
+        kspread_a       AutoNormalize kspread_n, kreset, kcalibrate, knormalize, iperiod
+        kskewness_a     AutoNormalize kskewness_n, kreset, kcalibrate, knormalize, iperiod
+        kurtosis_a      AutoNormalize kurtosis_n, kreset, kcalibrate, knormalize, iperiod
+        kflatness_a     AutoNormalize kflatness, kreset, kcalibrate, knormalize, iperiod
+        kcrest_a        AutoNormalize kcrest_n, kreset, kcalibrate, knormalize, iperiod
+        kflux_a         AutoNormalize kflux_n, kreset, kcalibrate, knormalize, iperiod
 
         krms            limit krms, 0, 1
         krms_preEq      limit krms_preEq, 0, 1
