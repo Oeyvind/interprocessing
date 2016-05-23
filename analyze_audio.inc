@@ -41,8 +41,21 @@
 	knoiseFloor_dB	chnget "inputNoisefloor"
 	kgate		= (dbfsamp(krms) < knoiseFloor_dB ? 0 : 1)	;  gate when below noise floor (for sampholding centroid and pitch etc)
         isecond_dB      = 9
+	kgate0		= (dbfsamp(krms) < knoiseFloor_dB+isecond_dB ? 0 : 1)	;  gate when far below noise floor (for sampholdingp pitch etc)
 	kgate2		= (dbfsamp(krms) < knoiseFloor_dB+isecond_dB ? 0 : 1)	;  gate when close to noise floor (for sampholding centroid and pitch etc)
         klowscaler      = limit(dbfsamp(krms)-knoiseFloor_dB, 0, isecond_dB)/isecond_dB      ; scaler to fade out different things towards the noise floor
+
+; ** tempo estimation
+;  iprd = 0.01
+;  imindur = 0.1
+;  imemdur = 3
+;  ihp = 1
+;  ithresh = ampdbfs(-40)
+;  ihtim = 0.005
+;  ixfdbak = 0.05
+;  istartempo = 110
+;  k1 tempest krms, iprd, imindur, imemdur, ihp, ithresh, ihtim, ixfdbak, istartempo, gifnTempomem
+;printk2 k1
         
 ; ***************
 ;analyze amplitude transients
@@ -68,7 +81,7 @@
 	                reinit lightTransient
         endif
 lightTransient:
-        kamp_trans      linseg 1,0.15,1,0,0,0
+        kamp_trans      linseg 1,0.15,1,0,0,1,0
                         chnset kamp_trans, "transientDisplay"
 rireturn
         katranDensity0   init 0
@@ -260,7 +273,7 @@ endif
 	                reinit clightTransient
         endif
 clightTransient:
-        kcentr_trans    linseg 1,0.15,1,0,0,0
+        kcentr_trans    linseg 1,0.15,1,0,0,1,0
                         chnset kcentr_trans, "ctransientDisplay"
 rireturn
 
@@ -301,7 +314,7 @@ rireturn
 	                reinit sklightTransient
         endif
 sklightTransient:
-        kkurt_trans     linseg 1,0.05,1,0,0,0
+        kkurt_trans     linseg 1,0.15,1,0,0,1,0
                         chnset kkurt_trans, "ktransientDisplay"
 rireturn
 
@@ -351,7 +364,7 @@ endif
         kcps            limit kcps, kpitch_low, kpitch_high
         kcps            tonek kcps, 50
 
-	kcps		samphold kcps, kgate
+	kcps		samphold kcps, kgate0
         ksemitone       = limit:k((log2(kcps/440)*12)+69, 0, 127)
         
 ; ***************
@@ -385,7 +398,7 @@ endif
 	                reinit puplightTransient
         endif
 puplightTransient:
-        kpitchup_trans  linseg 1,0.15,1,0,0,0
+        kpitchup_trans  linseg 1,0.15,1,0,0,1,0
                         chnset kpitchup_trans, "puptransientDisplay"
 rireturn
 
@@ -395,7 +408,7 @@ rireturn
 	                reinit pdwnlightTransient
         endif
 pdwnlightTransient:
-        kpitchdwn_trans linseg 1,0.15,1,0,0,0
+        kpitchdwn_trans linseg 1,0.15,1,0,0,1,0
                         chnset kpitchdwn_trans, "pdwntransientDisplay"
 rireturn
 ; ***************

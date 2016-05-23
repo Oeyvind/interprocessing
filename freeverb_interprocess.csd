@@ -16,7 +16,7 @@
 ;    If not, see <http://www.gnu.org/licenses/>.
 
 <Cabbage>
-form size(575, 370), caption("freeverb"), pluginID("ifvb")
+form size(575, 670), caption("freeverb"), pluginID("ifvb")
 ;image bounds(0, 0, 575, 370), file("background.jpg"), shape("round")
 label text("port"), bounds(10, 10, 80, 12), identchannel("port_id")
 
@@ -137,6 +137,8 @@ rslider bounds(494, 8, 66, 66), text("reverbmix"), channel("reverbmix"), range(0
 }
 
 ;next x position available below plants is 370
+csoundoutput bounds(5, 370, 290, 200), text("Output")
+
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>

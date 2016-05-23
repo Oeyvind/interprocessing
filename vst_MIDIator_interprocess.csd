@@ -16,7 +16,7 @@
 ;    If not, see <http://www.gnu.org/licenses/>.
 
 <Cabbage>
-form size(720, 710), caption("VST_MIDIator"), pluginID("vmid")
+form size(720, 1010), caption("VST_MIDIator"), pluginID("vmid")
 ;image bounds(0, 0, 575, 710), file("background.jpg"), shape("round")
 label text("port"), bounds(10, 10, 80, 12), identchannel("port_id")
 ;combobox channel("presets"), bounds(250, 6, 90, 20), populate("*.snaps")
@@ -319,7 +319,7 @@ label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
 }
 
 ;next x position available below plants is 710
-;csoundoutput bounds(5, 710, 290, 200), text("Output")
+csoundoutput bounds(5, 710, 290, 200), text("Output")
 
 </Cabbage>
 <CsoundSynthesizer>
@@ -344,7 +344,14 @@ label bounds(632, 42, 70, 12), text("ctrl"), colour(20,20,20,255)
 #include "subscriber_connect.inc"                   ; instr 2,3
 #include "subscriber_receiver.inc"                  ; instr 4,5,6,7,8
 
-
+instr 98
+ain     inch 1
+kmetro metro 1
+ktime timeinsts
+printk2 kmetro*ktime
+a0 = 0
+outs a0, a0
+endin
 ;****************************************************************
 ; MIDI output, send mixed and scaled parameter values as midi control messages
 
@@ -438,6 +445,7 @@ i1      0.1     1               ; init arrays
 i2	0.1	$SCORELEN
 #include "vst_mediator_score_events.inc"
 i99     0.2     $SCORELEN       ; MIDI out
+;i 98 0 $SCORELEN
 e
 </CsScore>
 </CsoundSynthesizer>

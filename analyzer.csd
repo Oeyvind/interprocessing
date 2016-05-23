@@ -91,9 +91,9 @@ label text("skewness"), bounds(505, 250, 200, 15), align("left"), rotate(1.5708,
 label text("kurtosis"), bounds(525, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
 
 image bounds(530, 5, 60,240), shape("sharp"), colour(45, 45,255, 40), identchannel("group3")	
-label text("flatness"), bounds(545, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
-label text("crest"), bounds(565, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
-label text("flux"), bounds(585, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
+label text("flatness"), bounds(545, 250, 190, 15), align("left"), rotate(1.5708, 0, 0)
+label text("crest"), bounds(565, 250, 165, 15), align("left"), rotate(1.5708, 0, 0)
+label text("flux"), bounds(585, 250, 145, 15), align("left"), rotate(1.5708, 0, 0)
 
 image bounds(590, 5, 100,240), shape("sharp"), colour(255,255, 50, 20), identchannel("group4")	
 ;label text("amp_t"), bounds(605, 250, 200, 15), align("left"), rotate(1.5708, 0, 0)
@@ -136,6 +136,8 @@ csoundoutput bounds(5, 500, 290, 250), text("Output")
         gi32melBands    ftgen   0, 0, 4096, -7, 0, gimelMax, 31, 4096-gimelMax, 31      ; divide mel scale evenly into 32 bands
         gi32melFqs      ftgen   0, 0, 32, -7, 0, 32, gimelMax                           ; mel frequencies for the 32 bands
         gi32melBandFqs  ftgen   0, 0, 32, 2, 0                                          ; to be filled with the frequencies for those 32 mel frequencies
+
+        ;gifnTempomem    ftgen   0, 0, 128, 16, 1, 128, 1, 0
 
 #include "analyze_udos.inc"
 

@@ -41,6 +41,7 @@
         Source_old2     strcpyk Source2
         kchan1          chnget Schanchn1
         kchan2          chnget Schanchn2
+        ;printk2 kchan1
         kchanchanged1   changed kchan1
         kchanchanged2   changed kchan2
         kanychanged1    = kchanchanged1 + abs(ksourcechanged1)
@@ -93,8 +94,10 @@
 	instr 5
         isource_chan     = p4
         inumActive      table isource_chan, giSourceActive
+        print inumActive, p1
+        Sscoreline      sprintf {{i %f 0.1 -1  %i}}, 6+frac(p1)+(isource_chan*0.1), isource_chan
+        puts Sscoreline, 1
         if inumActive == 0 then
-        Sscoreline      sprintf {{i %f 0.1 -1 %i}}, 6+frac(p1), isource_chan
                         scoreline_i Sscoreline
         endif
                         tableiw inumActive+1, isource_chan, giSourceActive
@@ -105,7 +108,7 @@
         knumActive      table isource_chan, giSourceActive
                         tablew knumActive-1, isource_chan, giSourceActive
         if knumActive == 1 then
-        Sscoreline      sprintfk {{i %f 0.1 -1 %i}}, -(6+frac(p1)), isource_chan
+        Sscoreline      sprintfk {{i %f 0 -1 %i}}, -(6+frac(p1)+(isource_chan*0.1)), isource_chan
                         scoreline Sscoreline, 1
         endif
         endif
@@ -137,7 +140,7 @@
         Scps_raw        sprintf {{cps_raw%i}}, isource_chan
 
         SoscName        sprintf {{/%s%i}}, "analysis", isource_chan
-
+        ;print p1
         krms            init 0
         krms_preEq      init 0
         kcps            init 0
@@ -199,8 +202,10 @@ ex_val:
         ;puts Source_val, kval
 
         kraw            strindexk Ssource, "_raw"
+        ;kdens           strindexk Ssource, "transdens"
         ;Stest           sprintfk "%s : %i", Ssource, kraw
         ;                puts Stest, kraw+10
+        ;krawflag        = (kraw+kdens>0?1:0)
         krawflag        = (kraw>0?1:0)
         Srawflag        sprintf "%s_raw_flag%i", Sparam, idest_mix_chn
         ;puts Srawflag, 1
