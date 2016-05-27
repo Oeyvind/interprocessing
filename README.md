@@ -15,6 +15,14 @@
 ;    along with The Signal Interaction Toolkit.  
 ;    If not, see <http://www.gnu.org/licenses/>.
 
+####
+DEPRECATION NOTICE!
+The further development of tools in this repo has been moved to https://github.com/Oeyvind/featexmod
+Significant changes to the model made this necessary. 
+This repo is kept for referrence purposes in relation to the DAFx-15 paper "A TOOLKIT FOR EXPERIMENTATION WITH SIGNAL INTERACTION", avaiilable at http://www.ntnu.edu/documents/1001201110/1266017954/DAFx-15_submission_16.pdf/f8f4770f-9fa4-4801-91c3-151856e4b324
+####
+
+
 # The Signal Interaction Toolkit
 A toolkit for experimentation with interprocessing (signal interaction)
 
