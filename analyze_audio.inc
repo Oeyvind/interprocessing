@@ -84,17 +84,32 @@ lightTransient:
         kamp_trans      linseg 1,0.15,1,0,0,1,0
                         chnset kamp_trans, "transientDisplay"
 rireturn
+
+        katran1second   delayk ktrigButn, 1
+        katran05second  delayk ktrigButn, 0.5
+        katranCount     init 0
+        katranCount     += ktrigButn
+        katranCount     -= (katran1second+katran05second)*0.5
+        
         katranDensity0   init 0
-        katranDensity    = katranDensity-(katranDensity0*5/kr) ; hipass
-        katranDensity0   = katranDensity
+        katranDensity    = katranDensity-(katranDensity0*1/kr) ; hipass
+        katranDensity0   = tonek(katranDensity, 1) ; lowpass
         katranDensity1   = katranDensity*1.1
-        iatranrise       = 0.001
+        iatranrise       = 10000
 	iatrandec        = 2
         iA               = exp(-6.90775527898 * (1/iatranrise)/kr)
         iB               = exp(-6.90775527898 * (1/iatrandec)/kr)
         katransDensEnv   init 0
         katransDensEnv   = (katranDensity1>katransDensEnv?(katranDensity1+(iA*(katransDensEnv-katranDensity1))):(katranDensity1+(iB*(katransDensEnv-katranDensity1))))
 
+        ;katranCount     tonek katranCount, 1
+        katransDensEnv1 init 0
+        iA               = exp(-6.90775527898 * (1/kr))
+        katransDensEnv  = katranCount-(katransDensEnv1*iA)
+        katransDensEnv1 delayk katransDensEnv, 1/kr
+        katransDensEnv  tonek katransDensEnv, 0.6
+        ;katransDensEnv   = (katranCount+(iA*(katransDensEnv-katranCount)))
+        
 ; ***************
 ; spectral analysis
 
